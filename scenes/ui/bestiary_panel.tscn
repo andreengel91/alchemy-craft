@@ -5,11 +5,12 @@
 
 [sub_resource type="StyleBoxFlat" id="SB_book"]
 bg_color = Color(0.961, 0.902, 0.784, 1)
-border_width_left = 3
+border_width_left = 12
 border_width_top = 3
-border_width_right = 3
+border_width_right = 12
 border_width_bottom = 3
 border_color = Color(0.5, 0.34, 0.14, 1)
+border_blend = true
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
@@ -185,9 +186,9 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -31.10498
-offset_top = 5.825001
-offset_right = -6.1049805
+offset_left = -41.57495
+offset_top = 5.825
+offset_right = -16.574951
 offset_bottom = 30.825
 grow_horizontal = 0
 theme_override_colors/font_color = Color(0.4, 0.22, 0.06, 1)

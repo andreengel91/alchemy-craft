@@ -134,7 +134,7 @@ func _make_card(mat_id: String, discovered: bool) -> Control:
 	name_lbl.text                 = display_name if discovered else "???"
 	name_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	name_lbl.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	name_lbl.add_theme_font_size_override("font_size", 9)
+	name_lbl.add_theme_font_size_override("font_size", 7)
 	name_lbl.add_theme_color_override("font_color",
 		Color(0.20, 0.11, 0.02) if discovered else Color(0.48, 0.36, 0.20, 0.8))
 	name_lbl.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -145,7 +145,7 @@ func _make_card(mat_id: String, discovered: bool) -> Control:
 		var ctr := Label.new()
 		ctr.horizontal_alignment  = HORIZONTAL_ALIGNMENT_CENTER
 		ctr.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		ctr.add_theme_font_size_override("font_size", 8)
+		ctr.add_theme_font_size_override("font_size", 7)
 		if discovered:
 			ctr.text = str(found) + "/" + str(total) + " recipes"
 			var ratio := float(found) / float(total)
