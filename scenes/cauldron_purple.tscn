@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://7t3j3m3tw4sy"]
+
+[ext_resource type="Texture2D" uid="uid://bk6lavnmib1if" path="res://assets/sprites/alchemy_animations.png" id="1_1yfes"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1yfes"]
+atlas = ExtResource("1_1yfes")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w2do4"]
+atlas = ExtResource("1_1yfes")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m5haa"]
+atlas = ExtResource("1_1yfes")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iceqf"]
+atlas = ExtResource("1_1yfes")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7mkqr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1yfes")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w2do4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m5haa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iceqf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[node name="cauldron" type="Node2D" unique_id=2024611192]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1214643165]
+sprite_frames = SubResource("SpriteFrames_7mkqr")
+autoplay = "default"
+frame_progress = 0.8365481

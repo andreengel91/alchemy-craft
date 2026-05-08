@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://dlp24euum2ttw"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_tj0yo"]
+size = Vector2(50, 50)
+
+[node name="Shelf" type="Node2D" unique_id=1714351430]
+
+[node name="ShelfSprite" type="Sprite2D" parent="." unique_id=1840937276]
+texture = SubResource("PlaceholderTexture2D_tj0yo")
+
+[node name="SlotContainer" type="Node2D" parent="." unique_id=569954355]
+
+[node name="Slot1" type="TextureButton" parent="SlotContainer" unique_id=322028449]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Slot2" type="TextureButton" parent="SlotContainer" unique_id=1522209222]
+offset_left = 32.0
+offset_right = 72.0
+offset_bottom = 40.0
+
+[node name="Slot3" type="TextureButton" parent="SlotContainer" unique_id=995788997]
+offset_left = 64.0
+offset_right = 104.0
+offset_bottom = 40.0

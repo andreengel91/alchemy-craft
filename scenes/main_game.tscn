@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://b8roe68u5bcyi"]
+
+[ext_resource type="Script" uid="uid://hn7gehmncnuy" path="res://scripts/main_game.gd" id="1_game01"]
+[ext_resource type="FontFile" uid="uid://cg25qrbv8wds0" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="2_0rdsr"]
+[ext_resource type="Texture2D" uid="uid://df7r7dani3r3w" path="res://assets/sprites/CauldronHD.png" id="2_72e8q"]
+[ext_resource type="Texture2D" uid="uid://cv3415kdoakeu" path="res://assets/sprites/wizard.png" id="2_d2op2"]
+[ext_resource type="Texture2D" uid="uid://d4coyy0i5xi0d" path="res://assets/sprites/BG.jpg" id="2_nqdth"]
+[ext_resource type="Texture2D" uid="uid://lre6i3a8p0dl" path="res://assets/sprites/shelve.png" id="3_2l77h"]
+[ext_resource type="Texture2D" uid="uid://dph4kl1rxlwlj" path="res://assets/sprites/potion_health.png" id="4_nqdth"]
+[ext_resource type="Texture2D" uid="uid://bdatv3e37m4bi" path="res://assets/sprites/potion_dragon.png" id="5_5cypo"]
+[ext_resource type="Texture2D" uid="uid://cl2emhrsxpoeh" path="res://assets/sprites/potion_death.png" id="6_o6v7o"]
+[ext_resource type="Texture2D" uid="uid://dpgkq12hhkok2" path="res://assets/sprites/potion_purple.png" id="7_wjob3"]
+
+[node name="MainGame" type="Node2D" unique_id=2146166051]
+script = ExtResource("1_game01")
+
+[node name="Background" type="ColorRect" parent="." unique_id=577647143]
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0.09019608, 0.09019608, 0.09019608, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=694094704]
+position = Vector2(640, 360)
+texture = ExtResource("2_nqdth")
+
+[node name="HintLabel" type="Label" parent="." unique_id=1720584889]
+offset_left = 33.0
+offset_top = 31.0
+offset_right = 433.0
+offset_bottom = 64.0
+theme_override_colors/font_color = Color(1, 1, 1, 0.8)
+theme_override_fonts/font = ExtResource("2_0rdsr")
+theme_override_font_sizes/font_size = 14
+text = "Click the cauldron
+to open the Alchemy Lab"
+
+[node name="Shelve" type="Sprite2D" parent="." unique_id=1301582594]
+position = Vector2(641, 342)
+texture = ExtResource("3_2l77h")
+
+[node name="PotionHealth" type="Sprite2D" parent="." unique_id=205979633]
+position = Vector2(422, 251)
+texture = ExtResource("4_nqdth")
+
+[node name="PotionDragon" type="Sprite2D" parent="." unique_id=2079280208]
+position = Vector2(892, 248)
+texture = ExtResource("5_5cypo")
+
+[node name="PotionDeath" type="Sprite2D" parent="." unique_id=1814728525]
+position = Vector2(540, 241)
+texture = ExtResource("6_o6v7o")
+
+[node name="PotionPurple" type="Sprite2D" parent="." unique_id=954601792]
+position = Vector2(770, 245)
+texture = ExtResource("7_wjob3")
+
+[node name="Wizard" type="Sprite2D" parent="." unique_id=1117914233]
+position = Vector2(648, 414)
+texture = ExtResource("2_d2op2")
+
+[node name="Cauldron" type="TextureButton" parent="." unique_id=881476201]
+offset_left = 407.0
+offset_top = 568.0
+offset_right = 888.0
+offset_bottom = 720.0
+texture_normal = ExtResource("2_72e8q")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="CauldronWindowLayer" type="CanvasLayer" parent="." unique_id=1099787914]
+layer = 10

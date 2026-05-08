@@ -1,0 +1,149 @@
+[gd_scene format=3 uid="uid://b26xa87x1fjf3"]
+
+[ext_resource type="Script" uid="uid://dqbm43ov6xlf3" path="res://scripts/Main.gd" id="1_vtaks"]
+[ext_resource type="Texture2D" uid="uid://3y1qiey7qt1o" path="res://assets/sprites/sidsummons_pixel_art_alchemy_dungeon_background_stone_brick_w_be41adcb-d37c-476e-98e3-9d491cd6e331_3.png" id="2_dinhu"]
+[ext_resource type="Texture2D" uid="uid://lre6i3a8p0dl" path="res://assets/sprites/shelve.png" id="2_u5sy4"]
+[ext_resource type="Texture2D" uid="uid://cl2emhrsxpoeh" path="res://assets/sprites/potion_death.png" id="3_kvpfn"]
+[ext_resource type="Texture2D" uid="uid://bdatv3e37m4bi" path="res://assets/sprites/potion_dragon.png" id="4_dinhu"]
+[ext_resource type="Texture2D" uid="uid://dpgkq12hhkok2" path="res://assets/sprites/potion_purple.png" id="5_kvuet"]
+[ext_resource type="PackedScene" uid="uid://cp3n2phkhq7sx" path="res://scenes/cauldron_green.tscn" id="6_p57ef"]
+[ext_resource type="Texture2D" uid="uid://dph4kl1rxlwlj" path="res://assets/sprites/potion_health.png" id="6_trtic"]
+[ext_resource type="PackedScene" uid="uid://bng4rwjcfkoat" path="res://scenes/CraftingUI.tscn" id="7_kvpfn"]
+[ext_resource type="FontFile" uid="uid://bopv5stolxb5o" path="res://assets/fonts/PixelOperator8.ttf" id="8_gee14"]
+[ext_resource type="Texture2D" uid="uid://cv3415kdoakeu" path="res://assets/sprites/wizard.png" id="8_trtic"]
+[ext_resource type="PackedScene" uid="uid://cyuajsvy4uk3r" path="res://scenes/pause_menue.tscn" id="9_0tnpc"]
+
+[sub_resource type="Environment" id="Environment_gee14"]
+background_mode = 3
+background_color = Color(0, 0.73929507, 1, 1)
+background_energy_multiplier = 1.08
+ambient_light_color = Color(0.732402, 1, 0.7077555, 1)
+ambient_light_energy = 6.77
+glow_enabled = true
+glow_intensity = 0.0
+glow_blend_mode = 0
+glow_hdr_threshold = 0.09
+glow_hdr_scale = 4.0
+
+[sub_resource type="Animation" id="Animation_u5sy4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:environment:glow_intensity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_gee14"]
+resource_name = "main_scene_animation"
+length = 10.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:environment:glow_intensity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5, 10),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 2.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_dinhu"]
+resource_name = "shadow_cast"
+length = 10.0
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0tnpc"]
+_data = {
+&"RESET": SubResource("Animation_u5sy4"),
+&"main_scene_animation": SubResource("Animation_gee14"),
+&"shadow_cast": SubResource("Animation_dinhu")
+}
+
+[node name="Game" type="Node2D" unique_id=1168646172]
+script = ExtResource("1_vtaks")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1175083347]
+scale = Vector2(0.88, 0.88)
+texture = ExtResource("2_dinhu")
+
+[node name="Shelve" type="Sprite2D" parent="." unique_id=1393585617]
+position = Vector2(-365.12497, 8.199997)
+scale = Vector2(0.625, 0.625)
+texture = ExtResource("2_u5sy4")
+
+[node name="potion-death" type="Sprite2D" parent="." unique_id=1763567117]
+position = Vector2(-315.12494, -58.800003)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("3_kvpfn")
+
+[node name="potion-dragon" type="Sprite2D" parent="." unique_id=1776776264]
+position = Vector2(-497.12494, -53.800003)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("4_dinhu")
+
+[node name="potion-purple" type="Sprite2D" parent="." unique_id=675020220]
+position = Vector2(-227.12494, -52.800003)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("5_kvuet")
+
+[node name="potion-health" type="Sprite2D" parent="." unique_id=62183208]
+position = Vector2(-408.12494, -57.800003)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("6_trtic")
+
+[node name="Wizard" type="Sprite2D" parent="." unique_id=1683794956]
+position = Vector2(-13, 56)
+texture = ExtResource("8_trtic")
+
+[node name="cauldron" parent="." unique_id=1562391326 instance=ExtResource("6_p57ef")]
+modulate = Color(0, 1.1569135, 2.137626, 1)
+position = Vector2(0, 265.58502)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="cauldron" unique_id=363280616]
+environment = SubResource("Environment_gee14")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="cauldron/WorldEnvironment" unique_id=924939627]
+libraries/ = SubResource("AnimationLibrary_0tnpc")
+autoplay = &"main_scene_animation"
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=289649160]
+scale = Vector2(2, 2)
+
+[node name="game-instruction" type="Label" parent="." unique_id=1187569764]
+offset_left = -172.0
+offset_top = -320.0
+offset_right = 133.0
+offset_bottom = -269.0
+theme_override_fonts/font = ExtResource("8_gee14")
+theme_override_font_sizes/font_size = 15
+text = "Click the cauldron to
+open crafting window."
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="CraftingUI" parent="." unique_id=2040844481 instance=ExtResource("7_kvpfn")]
+visible = false
+offset_right = 0.0
+offset_bottom = 0.0
+scale = Vector2(0.5, 0.5)
+mouse_filter = 2
+color = Color(1, 1, 1, 1)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=107926709]
+layer = 2
+
+[node name="PauseMenue" parent="CanvasLayer" unique_id=1351791195 instance=ExtResource("9_0tnpc")]
+visible = false
+layout_direction = 1
+offset_right = -730.0
+offset_bottom = -370.0
+mouse_filter = 2

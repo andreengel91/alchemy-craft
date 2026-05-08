@@ -1,0 +1,294 @@
+[gd_scene format=3 uid="uid://bk0flmyrjuv3o"]
+
+[ext_resource type="Script" uid="uid://ul7g0comhpgw" path="res://scripts/cauldron_window.gd" id="1_cw01"]
+[ext_resource type="FontFile" uid="uid://cg25qrbv8wds0" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="2_cq7gh"]
+[ext_resource type="FontFile" uid="uid://bopv5stolxb5o" path="res://assets/fonts/PixelOperator8.ttf" id="3_vbrxh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_overlay"]
+bg_color = Color(0, 0, 0, 0.70000005)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.4509804, 0.4509804, 0.4509804, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.5)
+shadow_size = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn"]
+bg_color = Color(0.19215687, 0.46666667, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0.1882353, 0.54901963, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_left"]
+bg_color = Color(0, 0.40018785, 1, 0)
+border_width_right = 2
+border_color = Color(0.4509804, 0.4509804, 0.4509804, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_popup"]
+bg_color = Color(0.15, 0.1, 0.22, 0.97)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8, 0.6, 1, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[node name="CauldronWindow" type="Control" unique_id=260319833]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_cw01")
+
+[node name="Overlay" type="ColorRect" parent="." unique_id=1983349798]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5)
+
+[node name="WindowPanel" type="Panel" parent="." unique_id=130728709]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.08
+anchor_right = 0.9
+anchor_bottom = 0.92
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_overlay")
+
+[node name="TitleBar" type="Label" parent="WindowPanel" unique_id=1110677199]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 8.0
+offset_bottom = 38.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_cq7gh")
+theme_override_font_sizes/font_size = 15
+text = "Alchemy Lab"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BestiaryButton" type="Button" parent="WindowPanel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -88.0
+offset_top = 6.0
+offset_right = -50.0
+offset_bottom = 40.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
+text = ""
+
+[node name="CloseButton" type="Button" parent="WindowPanel" unique_id=1844970961]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -44.0
+offset_top = 6.0
+offset_right = -6.0
+offset_bottom = 40.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
+text = "✕"
+
+[node name="HBox" type="HBoxContainer" parent="WindowPanel" unique_id=1536659827]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 46.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="LeftPanel" type="Panel" parent="WindowPanel/HBox" unique_id=1960066460]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.3
+theme_override_styles/panel = SubResource("StyleBoxFlat_left")
+
+[node name="VBox" type="VBoxContainer" parent="WindowPanel/HBox/LeftPanel" unique_id=381563640]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 6.0
+offset_right = -6.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 6
+
+[node name="ListTitle" type="Label" parent="WindowPanel/HBox/LeftPanel/VBox" unique_id=1783388288]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_vbrxh")
+theme_override_font_sizes/font_size = 11
+text = "Materials"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Separator" type="HSeparator" parent="WindowPanel/HBox/LeftPanel/VBox" unique_id=537002054]
+layout_mode = 2
+
+[node name="Scroll" type="ScrollContainer" parent="WindowPanel/HBox/LeftPanel/VBox" unique_id=1325237342]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MaterialList" type="VBoxContainer" parent="WindowPanel/HBox/LeftPanel/VBox/Scroll" unique_id=1039033686]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="RightPanel" type="Control" parent="WindowPanel/HBox" unique_id=1009532974]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.7
+
+[node name="ZoneLabel" type="Label" parent="WindowPanel/HBox/RightPanel" unique_id=1372306112]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 6.0
+offset_bottom = 26.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.6)
+theme_override_fonts/font = ExtResource("3_vbrxh")
+theme_override_font_sizes/font_size = 9
+text = "Drag materials here — overlap two to combine"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CraftZone" type="Control" parent="WindowPanel/HBox/RightPanel" unique_id=1637151234]
+unique_name_in_owner = true
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 30.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ZoneBg" type="ColorRect" parent="WindowPanel/HBox/RightPanel/CraftZone" unique_id=1778044173]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.70000005)
+
+[node name="RecipeCounter" type="Label" parent="WindowPanel/HBox/RightPanel/CraftZone"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -36.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.45)
+theme_override_fonts/font = ExtResource("3_vbrxh")
+theme_override_font_sizes/font_size = 9
+text = "0 / 0 recipes discovered"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ClearButton" type="Button" parent="WindowPanel/HBox/RightPanel" unique_id=733374841]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = -36.0
+offset_right = -6.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_vbrxh")
+theme_override_font_sizes/font_size = 11
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
+text = "Clear Table"
+
+[node name="DiscoveryPopup" type="Panel" parent="WindowPanel/HBox/RightPanel" unique_id=41918306]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -270.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = 70.0
+grow_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_popup")
+
+[node name="PopupHBox" type="HBoxContainer" parent="WindowPanel/HBox/RightPanel/DiscoveryPopup" unique_id=670431899]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="PopupSwatch" type="ColorRect" parent="WindowPanel/HBox/RightPanel/DiscoveryPopup/PopupHBox" unique_id=574663976]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="PopupLabel" type="Label" parent="WindowPanel/HBox/RightPanel/DiscoveryPopup/PopupHBox" unique_id=1063153669]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.9, 0.85, 1, 1)
+theme_override_font_sizes/font_size = 13
+vertical_alignment = 1
+
+[connection signal="pressed" from="WindowPanel/BestiaryButton" to="." method="_on_bestiary_btn_pressed"]
+[connection signal="pressed" from="WindowPanel/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="pressed" from="WindowPanel/HBox/RightPanel/ClearButton" to="." method="_on_clear_button_pressed"]

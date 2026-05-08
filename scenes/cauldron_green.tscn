@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://cp3n2phkhq7sx"]
+
+[ext_resource type="Script" uid="uid://hrnvxm62v36a" path="res://scripts/click_target.gd" id="2_3m8wt"]
+[ext_resource type="Texture2D" uid="uid://df7r7dani3r3w" path="res://assets/sprites/CauldronHD.png" id="2_8h0pq"]
+
+[node name="cauldron" type="Area2D" unique_id=1108338604]
+script = ExtResource("2_3m8wt")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1128151588]
+texture = ExtResource("2_8h0pq")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1980272299]
+polygon = PackedVector2Array(-68, -85, 69, -85, 119, -81, 151, -74, 188, -68, 207, -61, 220, -52, 226, -45, 226, -25, 219, -18, 230, -11, 244, 2, 258, 16, 271, 31, 280, 49, 289, 65, 294, 94, -296, 95, -290, 73, -284, 56, -274, 39, -264, 23, -249, 7, -233, -8, -216, -19, -225, -26, -225, -47, -210, -60, -185, -69, -157, -74, -136, -78, -116, -81)
