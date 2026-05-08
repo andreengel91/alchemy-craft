@@ -116,7 +116,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.19215687, 0.46666667, 1, 1)
 theme_override_fonts/font = ExtResource("3_wu84c")
 theme_override_font_sizes/font_size = 16
-text = "Combine elements. Discover secrets."
+text = "Combine elements.Discover secrets."
 horizontal_alignment = 1
 
 [node name="Spacer" type="Control" parent="Center/VBox" unique_id=354996856]
@@ -144,7 +144,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_rtw2f")
 text = "Exit"
 
 [node name="Wizard" type="Sprite2D" parent="." unique_id=1226982727]
-position = Vector2(953, 420)
+position = Vector2(941, 420)
 texture = ExtResource("4_wu84c")
 
 [connection signal="pressed" from="Center/VBox/StartButton" to="." method="_on_start_button_pressed"]

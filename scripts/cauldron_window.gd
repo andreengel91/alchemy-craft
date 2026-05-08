@@ -64,9 +64,10 @@ func _spawn_in_zone(id: String) -> void:
 	_craft_zone.add_child(item)
 
 func _make_item(id: String) -> Control:
-	var root := Control.new()
+	var root := VBoxContainer.new()
 	root.set_script(MATERIAL_ITEM_SCRIPT)
-	root.custom_minimum_size = Vector2(64, 80)
+	root.custom_minimum_size = Vector2(64, 0)
+	root.add_theme_constant_override("separation", 6)
 
 	var _mat_tex := load("res://assets/materials/" + id + ".png") as Texture2D
 	var swatch: Control
@@ -82,16 +83,16 @@ func _make_item(id: String) -> Control:
 		swatch = cr
 	swatch.name = "Swatch"
 	swatch.custom_minimum_size = Vector2(64, 64)
-	swatch.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT)
+	swatch.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	swatch.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	root.add_child(swatch)
 
 	var label := Label.new()
 	label.name = "Label"
-	label.position = Vector2(0, 64)
-	label.size = Vector2(64, 16)
+	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	label.add_theme_font_size_override("font_size", 9)
+	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	label.add_theme_font_size_override("font_size", 8)
 	label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	root.add_child(label)
 
@@ -154,7 +155,20 @@ func _on_bestiary_btn_pressed() -> void:
 
 func _show_popup(id: String, display_name: String) -> void:
 	_popup_label.text = "Discovered: " + display_name + "!"
-	_popup_swatch.color = _swatch_color(id)
+	for child in _popup_swatch.get_children():
+		child.queue_free()
+	var _pop_tex := load("res://assets/materials/" + id + ".png") as Texture2D
+	if _pop_tex:
+		_popup_swatch.color = Color.TRANSPARENT
+		var tr := TextureRect.new()
+		tr.texture = _pop_tex
+		tr.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
+		tr.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		tr.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		tr.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		_popup_swatch.add_child(tr)
+	else:
+		_popup_swatch.color = _swatch_color(id)
 	_popup.visible = true
 	_popup_timer = POPUP_DURATION
 	var tween := create_tween()
