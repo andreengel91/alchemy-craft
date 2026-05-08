@@ -112,11 +112,21 @@ func _make_card(mat_id: String, discovered: bool) -> Control:
 	vbox.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT, Control.PRESET_MODE_MINSIZE, 5)
 
 	# Material colour swatch
-	var swatch := ColorRect.new()
+	var _mat_tex := load("res://assets/materials/" + mat_id + ".png") as Texture2D if discovered else null
+	var swatch: Control
+	if _mat_tex:
+		var tr := TextureRect.new()
+		tr.texture = _mat_tex
+		tr.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
+		tr.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		swatch = tr
+	else:
+		var cr := ColorRect.new()
+		cr.color = MATERIAL_ITEM_SCRIPT.id_to_color(mat_id) if discovered \
+				 else Color(0.42, 0.30, 0.16, 0.75)
+		swatch = cr
 	swatch.custom_minimum_size  = Vector2(28, 28)
 	swatch.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
-	swatch.color = MATERIAL_ITEM_SCRIPT.id_to_color(mat_id) if discovered \
-				 else Color(0.42, 0.30, 0.16, 0.75)
 	vbox.add_child(swatch)
 
 	# Name label — dark ink for discovered, faded for unknown
