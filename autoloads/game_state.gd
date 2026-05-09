@@ -1,10 +1,16 @@
 extends Node
 
+signal recipe_discovered(result_id: String)
+
 const SAVE_PATH := "user://alchemy_save.json"
 const BASE_MATERIALS := ["fire", "water", "earth", "shadow", "light"]
 
 var unlocked_materials: Array[String] = []
 var discovered_recipes: Array[String] = []
+
+# Stored as Unix timestamp — persists across CauldronWindow open/close
+# but resets on game restart. Not saved to disk intentionally.
+var hint_ready_at: float = 0.0
 
 func _ready() -> void:
 	load_game()
@@ -22,6 +28,7 @@ func add_discovered_recipe(result_id: String) -> void:
 	if result_id not in discovered_recipes:
 		discovered_recipes.append(result_id)
 		save_game()
+		recipe_discovered.emit(result_id)
 
 func save_game() -> void:
 	var file := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
@@ -50,5 +57,6 @@ func load_game() -> void:
 func reset_save() -> void:
 	unlocked_materials.assign(BASE_MATERIALS)
 	discovered_recipes.clear()
+	hint_ready_at = 0.0
 	if FileAccess.file_exists(SAVE_PATH):
 		DirAccess.remove_absolute(SAVE_PATH)

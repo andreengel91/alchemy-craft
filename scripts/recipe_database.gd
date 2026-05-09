@@ -23,6 +23,9 @@ func unique_result_count() -> int:
 		seen[r["result"]] = true
 	return seen.size()
 
+func get_all_recipes() -> Array:
+	return _recipes
+
 func find_recipe(a: String, b: String) -> Dictionary:
 	for r in _recipes:
 		var ing: Array = r["ingredients"]

@@ -1,8 +1,14 @@
 [gd_scene format=3 uid="uid://ed1uma07l3tg"]
 
 [ext_resource type="Script" uid="uid://d2watjqje4pp4" path="res://scripts/pause_menu.gd" id="1_pm01"]
+[ext_resource type="Texture2D" uid="uid://p52rv7gpa4ih" path="res://assets/ui/pause-menu/btn_pause_menu.png" id="2_knqa7"]
 [ext_resource type="FontFile" uid="uid://cg25qrbv8wds0" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="2_myx47"]
-[ext_resource type="FontFile" uid="uid://bopv5stolxb5o" path="res://assets/fonts/PixelOperator8.ttf" id="3_kukqi"]
+[ext_resource type="Texture2D" uid="uid://c20it0mvccli7" path="res://assets/ui/btn_resume_normal.png" id="4_rn"]
+[ext_resource type="Texture2D" uid="uid://c4bb15jc3x1n6" path="res://assets/ui/btn_resume_hover.png" id="5_rh"]
+[ext_resource type="Texture2D" uid="uid://ci66dgbsyyf5b" path="res://assets/ui/btn_achievements_normal.png" id="6_an"]
+[ext_resource type="Texture2D" uid="uid://bw0rsm4442qfk" path="res://assets/ui/btn_achievements_hover.png" id="7_ah"]
+[ext_resource type="Texture2D" uid="uid://bh3g8fwgg4606" path="res://assets/ui/btn_reset_normal.png" id="8_rsn"]
+[ext_resource type="Texture2D" uid="uid://bje0ed8yc1st5" path="res://assets/ui/btn_reset_hover.png" id="9_rsh"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
 bg_color = Color(0.08, 0.06, 0.13, 0.98)
@@ -16,54 +22,6 @@ corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 shadow_size = 20
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn"]
-bg_color = Color(0.19215687, 0.46666667, 1, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0, 0.1882353, 0.54901963, 1)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_hover"]
-bg_color = Color(0.44540375, 0.6401105, 1, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0, 0.1882353, 0.54901963, 1)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_reset"]
-bg_color = Color(0.25, 0.08, 0.08, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.8, 0.28, 0.28, 0.8)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_reset_hover"]
-bg_color = Color(0.4, 0.12, 0.12, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(1, 0.4, 0.4, 0.9)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
 
 [node name="PauseMenu" type="Control" unique_id=1196018452]
 layout_mode = 3
@@ -82,6 +40,23 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.65)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1450898947]
+position = Vector2(634.525, 360.795)
+texture = ExtResource("2_knqa7")
+
+[node name="Title" type="Label" parent="." unique_id=561879607]
+layout_mode = 0
+offset_left = 538.0
+offset_top = 150.27
+offset_right = 742.0
+offset_bottom = 223.27005
+theme_override_colors/font_color = Color(1, 1, 1, 0.8)
+theme_override_fonts/font = ExtResource("2_myx47")
+theme_override_font_sizes/font_size = 34
+text = "Game
+Paused"
+horizontal_alignment = 1
 
 [node name="Center" type="CenterContainer" parent="." unique_id=1665460909]
 layout_mode = 1
@@ -112,54 +87,55 @@ theme_override_constants/margin_bottom = 32
 layout_mode = 2
 theme_override_constants/separation = 14
 
-[node name="Title" type="Label" parent="Center/Panel/Margin/VBox" unique_id=561879607]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 0.8)
-theme_override_fonts/font = ExtResource("2_myx47")
-theme_override_font_sizes/font_size = 34
-text = "Paused"
-horizontal_alignment = 1
-
 [node name="Divider" type="HSeparator" parent="Center/Panel/Margin/VBox" unique_id=1368705345]
+visible = false
 layout_mode = 2
 
 [node name="Spacer" type="Control" parent="Center/Panel/Margin/VBox" unique_id=45248701]
 custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 
-[node name="ResumeButton" type="Button" parent="Center/Panel/Margin/VBox" unique_id=705736004]
+[node name="ResumeButton" type="TextureButton" parent="Center/Panel/Margin/VBox" unique_id=705736004]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-theme_override_colors/font_color = Color(0.9, 0.85, 1, 1)
-theme_override_fonts/font = ExtResource("3_kukqi")
-theme_override_font_sizes/font_size = 12
-theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_btn")
-theme_override_styles/hover = SubResource("StyleBoxFlat_btn_hover")
-text = "Resume"
+texture_normal = ExtResource("4_rn")
+texture_pressed = ExtResource("5_rh")
+texture_hover = ExtResource("5_rh")
+texture_focused = ExtResource("4_rn")
+ignore_texture_size = true
+stretch_mode = 0
 
-[node name="ResetButton" type="Button" parent="Center/Panel/Margin/VBox" unique_id=1987809227]
+[node name="AchievementsButton" type="TextureButton" parent="Center/Panel/Margin/VBox" unique_id=316578529]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.65, 0.65, 1)
-theme_override_fonts/font = ExtResource("3_kukqi")
-theme_override_font_sizes/font_size = 12
-theme_override_styles/normal = SubResource("StyleBoxFlat_btn_reset")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_reset")
-theme_override_styles/hover = SubResource("StyleBoxFlat_btn_reset_hover")
-text = "Reset Progress"
+texture_normal = ExtResource("6_an")
+texture_pressed = ExtResource("7_ah")
+texture_hover = ExtResource("7_ah")
+texture_focused = ExtResource("6_an")
+ignore_texture_size = true
+stretch_mode = 0
 
-[node name="QuitButton" type="Button" parent="Center/Panel/Margin/VBox" unique_id=227222747]
+[node name="ResetButton" type="TextureButton" parent="Center/Panel/Margin/VBox" unique_id=1987809227]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-theme_override_colors/font_color = Color(0.9, 0.85, 1, 1)
-theme_override_fonts/font = ExtResource("3_kukqi")
-theme_override_font_sizes/font_size = 12
-theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_btn")
-theme_override_styles/hover = SubResource("StyleBoxFlat_btn_hover")
-text = "Quit to Menu"
+texture_normal = ExtResource("8_rsn")
+texture_pressed = ExtResource("9_rsh")
+texture_hover = ExtResource("9_rsh")
+texture_focused = ExtResource("8_rsn")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="QuitButton" type="TextureButton" parent="Center/Panel/Margin/VBox" unique_id=259964170]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+texture_normal = ExtResource("6_an")
+texture_pressed = ExtResource("7_ah")
+texture_hover = ExtResource("7_ah")
+texture_focused = ExtResource("6_an")
+ignore_texture_size = true
+stretch_mode = 0
 
 [connection signal="pressed" from="Center/Panel/Margin/VBox/ResumeButton" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="Center/Panel/Margin/VBox/AchievementsButton" to="." method="_on_achievements_pressed"]
 [connection signal="pressed" from="Center/Panel/Margin/VBox/ResetButton" to="." method="_on_reset_pressed"]
-[connection signal="pressed" from="Center/Panel/Margin/VBox/QuitButton" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="Center/Panel/Margin/VBox/QuitButton" to="." method="_on_quit_button_pressed"]

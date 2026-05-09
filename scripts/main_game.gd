@@ -46,7 +46,19 @@ func _open_pause() -> void:
 	_pause_instance.resumed.connect(_close_pause)
 	_pause_instance.reset_requested.connect(_on_reset)
 	_pause_instance.quit_requested.connect(_on_quit)
+	_pause_instance.achievements_requested.connect(_open_achievements_from_pause)
 	_cauldron_window_layer.add_child(_pause_instance)
+
+func _open_achievements_from_pause() -> void:
+	# Hide (not destroy) pause menu — game stays paused, only UI changes
+	_pause_instance.visible = false
+	var overview: Control = preload("res://scenes/ui/achievement_overview.tscn").instantiate()
+	get_tree().root.add_child(overview)
+	# Re-show pause menu when achievements panel is closed
+	overview.tree_exited.connect(func() -> void:
+		if is_instance_valid(_pause_instance):
+			_pause_instance.visible = true
+	)
 
 func _close_pause() -> void:
 	if _pause_instance:
@@ -56,6 +68,7 @@ func _close_pause() -> void:
 func _on_reset() -> void:
 	_close_pause()
 	GameState.reset_save()
+	AchievementManager.reset()
 	get_tree().reload_current_scene()
 
 func _on_quit() -> void:

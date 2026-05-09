@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://br671nq8w8m8s"]
+
+[ext_resource type="Script" uid="uid://ceqw4ioxc1x2k" path="res://scripts/achievement_button.gd" id="1_ab"]
+[ext_resource type="FontFile" uid="uid://bopv5stolxb5o" path="res://assets/fonts/PixelOperator8.ttf" id="2_reg"]
+
+[sub_resource type="StyleBoxFlat" id="SB_btn"]
+bg_color = Color(0.19215687, 0.46666667, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0.1882353, 0.54901963, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="AchievementButton" type="Control" unique_id=879881425]
+custom_minimum_size = Vector2(130, 32)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_ab")
+
+[node name="Button" type="Button" parent="." unique_id=1163488547]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_reg")
+theme_override_font_sizes/font_size = 11
+theme_override_styles/normal = SubResource("SB_btn")
+text = "Achievements"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

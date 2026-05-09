@@ -9,6 +9,7 @@ const RECIPE_PATH := "res://data/recipes.json"
 
 var _recipes: Array = []
 var _name_lookup: Dictionary = {}
+var _lore: Dictionary = {}
 
 func _ready() -> void:
 	_load_data()
@@ -26,6 +27,12 @@ func _load_data() -> void:
 		_name_lookup[base] = base.replace("_", " ").capitalize()
 	for r in _recipes:
 		_name_lookup[r["result"]] = r["result_name"]
+	var lore_file := FileAccess.open("res://data/lore.json", FileAccess.READ)
+	if lore_file:
+		var lore_parsed = JSON.parse_string(lore_file.get_as_text())
+		lore_file.close()
+		if lore_parsed is Dictionary:
+			_lore = lore_parsed
 
 # Called each time the panel opens so data stays current.
 func refresh() -> void:
@@ -111,13 +118,23 @@ func _make_card(mat_id: String, discovered: bool) -> Control:
 	card.add_child(vbox)
 	vbox.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT, Control.PRESET_MODE_MINSIZE, 5)
 
+	# Lore shown as tooltip on hover for discovered cards
+	if discovered and _lore.has(mat_id):
+		card.tooltip_text = _lore[mat_id]
+
+	# Swatch container — holds material icon + optional completion checkmark
+	var swatch_wrap := Control.new()
+	swatch_wrap.custom_minimum_size  = Vector2(28, 28)
+	swatch_wrap.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	vbox.add_child(swatch_wrap)
+
 	# Material colour swatch
 	var _mat_tex := load("res://assets/materials/" + mat_id + ".png") as Texture2D if discovered else null
 	var swatch: Control
 	if _mat_tex:
 		var tr := TextureRect.new()
-		tr.texture = _mat_tex
-		tr.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
+		tr.texture     = _mat_tex
+		tr.expand_mode  = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
 		tr.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		swatch = tr
 	else:
@@ -125,9 +142,9 @@ func _make_card(mat_id: String, discovered: bool) -> Control:
 		cr.color = MATERIAL_ITEM_SCRIPT.id_to_color(mat_id) if discovered \
 				 else Color(0.42, 0.30, 0.16, 0.75)
 		swatch = cr
-	swatch.custom_minimum_size  = Vector2(28, 28)
-	swatch.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
-	vbox.add_child(swatch)
+	swatch.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	swatch.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	swatch_wrap.add_child(swatch)
 
 	# Name label — dark ink for discovered, faded for unknown
 	var name_lbl := Label.new()
@@ -157,9 +174,35 @@ func _make_card(mat_id: String, discovered: bool) -> Control:
 			ctr.add_theme_color_override("font_color", Color(0.48, 0.36, 0.20, 0.6))
 		vbox.add_child(ctr)
 
+	# Full-card completion overlay — dark layer over icon + label, checkmark centered on top
+	if discovered and total > 0 and found >= total:
+		var dark := ColorRect.new()
+		dark.color = Color(0, 0, 0, 0.5)
+		dark.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		dark.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		card.add_child(dark)
+		var ck_tex := load("res://assets/ui/checkmark.png") as Texture2D
+		if ck_tex:
+			var ck := TextureRect.new()
+			ck.texture      = ck_tex
+			ck.expand_mode  = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
+			ck.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+			ck.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			ck.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+			dark.add_child(ck)
+
 	return card
 
 # ── Signals ───────────────────────────────────────────────────────────────────
 
 func _on_close_button_pressed() -> void:
 	visible = false
+
+# ESC closes bestiary without propagating to CauldronWindow/main_game.
+# Using _input() ensures this fires before main_game's _unhandled_input().
+func _input(event: InputEvent) -> void:
+	if not visible:
+		return
+	if event.is_action_pressed("esc"):
+		accept_event()
+		visible = false

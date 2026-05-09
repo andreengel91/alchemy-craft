@@ -2,31 +2,53 @@ extends Control
 
 signal closed
 
-const OVERLAP_DIST   := 52.0
-const POPUP_DURATION := 2.5
+const OVERLAP_DIST  := 52.0
+const HINT_COOLDOWN := 300.0  # 5 minutes in seconds
 
-@onready var _material_list:  VBoxContainer = %MaterialList
-@onready var _craft_zone:     Control       = %CraftZone
-@onready var _popup:          Panel         = %DiscoveryPopup
-@onready var _popup_label:    Label         = %PopupLabel
-@onready var _popup_swatch:   ColorRect     = %PopupSwatch
-@onready var _recipe_counter: Label         = %RecipeCounter
-@onready var _bestiary_btn:   Button        = %BestiaryButton
+@onready var _material_list:   VBoxContainer = %MaterialList
+@onready var _craft_zone:      Control       = %CraftZone
+@onready var _recipe_counter:  Label         = %RecipeCounter
+@onready var _bestiary_btn:    Button        = %BestiaryButton
+@onready var _hint_btn:        Button        = %HintButton
+@onready var _hint_container:  Panel         = %HintContainer
+@onready var _hint_lbl:        Label         = %HintLabel
 
 var _db: Node = null
-var _popup_timer: float = 0.0
+var _hint_visible_timer: float = 0.0
+var _last_hint_display: String = ""
 var _bestiary_panel: Control = null
+var _lore: Dictionary = {}
 
 const MATERIAL_ITEM_SCRIPT := preload("res://scripts/material_item.gd")
 const _BESTIARY_SCENE      := preload("res://scenes/ui/bestiary_panel.tscn")
+const _LORE_TOAST_SCENE    := preload("res://scenes/ui/lore_toast.tscn")
+
+const MATERIAL_DESCRIPTORS := {
+	"fire": "burning", "water": "flowing", "earth": "solid",
+	"shadow": "hidden", "light": "radiant", "steam": "rising",
+	"lava": "molten", "mud": "murky", "holy_water": "sacred",
+	"crystal": "prismatic", "twilight": "liminal", "obsidian": "glassy",
+	"clay": "unformed", "divinity": "transcendent", "gem": "precious",
+	"void": "empty", "ancient_stone": "ancient", "abyss": "abyssal",
+	"sacred_inferno": "righteous", "philosophers_stone": "legendary",
+	"forbidden_relic": "sealed", "murk": "opaque", "hellfire": "infernal",
+	"radiance": "brilliant", "cursed_soil": "tainted", "ocean": "vast",
+	"sand": "drifting", "fog": "drifting", "cloud": "towering",
+	"sun": "blazing", "plasma": "volatile", "lightning": "crackling",
+	"storm": "raging", "ice": "frozen", "snow": "ephemeral",
+}
+
+# ── Lifecycle ─────────────────────────────────────────────────────────────────
 
 func _ready() -> void:
 	_db = Node.new()
 	_db.set_script(preload("res://scripts/recipe_database.gd"))
 	add_child(_db)
-	_popup.visible = false
+	_hint_container.visible = false
 	_refresh_list()
 	_update_recipe_counter()
+	_update_hint_button()
+	_load_lore()
 	var book_icon := load("res://assets/ui/book.png") as Texture2D
 	if book_icon:
 		_bestiary_btn.icon = book_icon
@@ -34,10 +56,11 @@ func _ready() -> void:
 		_bestiary_btn.text = "B"
 
 func _process(delta: float) -> void:
-	if _popup.visible:
-		_popup_timer -= delta
-		if _popup_timer <= 0.0:
-			_popup.visible = false
+	if _hint_container.visible:
+		_hint_visible_timer -= delta
+		if _hint_visible_timer <= 0.0:
+			_fade_out_hint()
+	_update_hint_button()
 
 # ── Materials list (left panel) ───────────────────────────────────────────────
 
@@ -109,7 +132,6 @@ func _check_overlaps(item: Control) -> void:
 	var item_center: Vector2 = item.position + _ITEM_HALF
 	for child in _craft_zone.get_children():
 		var other := child as Control
-		# Skip non-material nodes (e.g. ZoneBg) and the item itself
 		if other == null or other == item or other.get("material_id") == null:
 			continue
 		var other_center: Vector2 = other.position + _ITEM_HALF
@@ -132,8 +154,10 @@ func _try_combine(a: Control, b: Control) -> void:
 	GameState.add_discovered_recipe(result["result"])
 	if is_new:
 		_add_list_entry(result["result"])
-		_show_popup(result["result"], result["result_name"])
 		_update_recipe_counter()
+		_show_lore_toast(result["result"], result["result_name"])
+		if _bestiary_panel != null and _bestiary_panel.visible:
+			_bestiary_panel.refresh()
 
 # ── Recipe counter ───────────────────────────────────────────────────────────
 
@@ -151,37 +175,83 @@ func _on_bestiary_btn_pressed() -> void:
 	_bestiary_panel.refresh()
 	_bestiary_panel.visible = true
 
-# ── Discovery popup ───────────────────────────────────────────────────────────
+# ── Hint system ───────────────────────────────────────────────────────────────
 
-func _show_popup(id: String, display_name: String) -> void:
-	_popup_label.text = "Discovered: " + display_name + "!"
-	for child in _popup_swatch.get_children():
-		child.queue_free()
-	var _pop_tex := load("res://assets/materials/" + id + ".png") as Texture2D
-	if _pop_tex:
-		_popup_swatch.color = Color.TRANSPARENT
-		var tr := TextureRect.new()
-		tr.texture = _pop_tex
-		tr.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
-		tr.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		tr.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-		tr.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		_popup_swatch.add_child(tr)
+func _on_hint_btn_pressed() -> void:
+	var hint := _get_hint()
+	_hint_lbl.text = hint
+	_hint_container.modulate.a = 0.0
+	_hint_container.visible = true
+	_hint_visible_timer = 5.0
+	var tw := create_tween()
+	tw.tween_property(_hint_container, "modulate:a", 1.0, 0.3)
+	GameState.hint_ready_at = Time.get_unix_time_from_system() + HINT_COOLDOWN
+
+func _fade_out_hint() -> void:
+	var tw := create_tween()
+	tw.tween_property(_hint_container, "modulate:a", 0.0, 0.4)
+	await tw.finished
+	_hint_container.visible = false
+
+func _update_hint_button() -> void:
+	var now := Time.get_unix_time_from_system()
+	var remaining := GameState.hint_ready_at - now
+	if remaining <= 0.0:
+		if _hint_btn.disabled:
+			_hint_btn.disabled = false
+			_hint_btn.text = "? Hint"
+			_last_hint_display = ""
 	else:
-		_popup_swatch.color = _swatch_color(id)
-	_popup.visible = true
-	_popup_timer = POPUP_DURATION
-	var tween := create_tween()
-	_popup.modulate.a = 0.0
-	tween.tween_property(_popup, "modulate:a", 1.0, 0.3)
+		_hint_btn.disabled = true
+		var mins := int(remaining) / 60
+		var secs := int(remaining) % 60
+		var display := "%d:%02d" % [mins, secs]
+		if display != _last_hint_display:
+			_hint_btn.text = display
+			_last_hint_display = display
+
+func _get_hint() -> String:
+	var all_recipes: Array = _db.get_all_recipes()
+	var candidates: Array = []
+	for r in all_recipes:
+		# Skip already discovered results
+		if r["result"] in GameState.discovered_recipes:
+			continue
+		# Only suggest recipes where both ingredients are already unlocked
+		var ing_a: String = r["ingredients"][0]
+		var ing_b: String = r["ingredients"][1]
+		if ing_a in GameState.unlocked_materials and ing_b in GameState.unlocked_materials:
+			candidates.append(r)
+	if candidates.is_empty():
+		return "You have mastered all alchemical secrets."
+	var recipe: Dictionary = candidates[randi() % candidates.size()]
+	var da: String = MATERIAL_DESCRIPTORS.get(recipe["ingredients"][0], recipe["ingredients"][0].replace("_", " "))
+	var db_str: String = MATERIAL_DESCRIPTORS.get(recipe["ingredients"][1], recipe["ingredients"][1].replace("_", " "))
+	return "Something %s meets something %s..." % [da, db_str]
+
+# ── Lore toast ────────────────────────────────────────────────────────────────
+
+func _load_lore() -> void:
+	var file := FileAccess.open("res://data/lore.json", FileAccess.READ)
+	if not file:
+		return
+	var parsed = JSON.parse_string(file.get_as_text())
+	file.close()
+	if parsed is Dictionary:
+		_lore = parsed
+
+func _show_lore_toast(mat_id: String, mat_name: String) -> void:
+	var lore_text: String = _lore.get(mat_id, "")
+	if lore_text.is_empty():
+		return
+	var toast: Node = _LORE_TOAST_SCENE.instantiate()
+	get_tree().root.add_child(toast)
+	toast.call("setup", mat_name, lore_text)
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
 
 func _pretty(id: String) -> String:
 	return id.replace("_", " ").capitalize()
-
-func _swatch_color(id: String) -> Color:
-	return MATERIAL_ITEM_SCRIPT.id_to_color(id)
 
 func _on_close_button_pressed() -> void:
 	emit_signal("closed")
