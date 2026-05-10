@@ -34,6 +34,16 @@ theme_override_font_sizes/font_size = 14
 text = "Click the cauldron
 to open the Alchemy Lab"
 
+[node name="HintLabel2" type="Label" parent="." unique_id=1510175124]
+offset_left = 33.0
+offset_top = 91.0
+offset_right = 433.0
+offset_bottom = 124.0
+theme_override_colors/font_color = Color(1, 1, 1, 0.8)
+theme_override_fonts/font = ExtResource("2_0rdsr")
+theme_override_font_sizes/font_size = 14
+text = "Press ESC for the menu"
+
 [node name="Shelve" type="Sprite2D" parent="." unique_id=1301582594]
 position = Vector2(641, 342)
 texture = ExtResource("3_2l77h")

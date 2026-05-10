@@ -5,54 +5,10 @@
 [ext_resource type="FontFile" uid="uid://cg25qrbv8wds0" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="2_bqqt6"]
 [ext_resource type="FontFile" uid="uid://bopv5stolxb5o" path="res://assets/fonts/PixelOperator8.ttf" id="3_wu84c"]
 [ext_resource type="Texture2D" uid="uid://cv3415kdoakeu" path="res://assets/sprites/wizard.png" id="4_wu84c"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn"]
-bg_color = Color(0.19215687, 0.46666667, 1, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0, 0.1882353, 0.54901963, 1)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wu84c"]
-bg_color = Color(0.44705883, 0.6392157, 1, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0, 0.1882353, 0.54901963, 1)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8ln24"]
-bg_color = Color(0.19215687, 0.46666667, 1, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0, 0.1882353, 0.54901963, 1)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rtw2f"]
-bg_color = Color(0.44705883, 0.6392157, 1, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0, 0.1882353, 0.54901963, 1)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
+[ext_resource type="Texture2D" uid="uid://dphkjjah2o7vu" path="res://assets/ui/btn_exit_normal.png" id="5_rtw2f"]
+[ext_resource type="Texture2D" uid="uid://tvms2rpbgkwe" path="res://assets/ui/btn_start-game_normal.png" id="7_oa1go"]
+[ext_resource type="Texture2D" uid="uid://dg6je8l7thdt6" path="res://assets/ui/btn_exit_hoverl.png" id="7_tbmy8"]
+[ext_resource type="Texture2D" uid="uid://cvjcxia8u4ssy" path="res://assets/ui/btn_start-game_hover.png" id="9_jk1qb"]
 
 [node name="MainMenu" type="Control" unique_id=1035727657]
 layout_mode = 3
@@ -76,25 +32,15 @@ color = Color(0, 0, 0, 1)
 position = Vector2(1175, 360)
 texture = ExtResource("2_8ln24")
 
-[node name="Title2" type="Label" parent="." unique_id=285908360]
-layout_mode = 0
-offset_left = 475.0
-offset_top = 231.96
-offset_right = 805.0
-offset_bottom = 330.96002
-pivot_offset = Vector2(7, 14)
-theme_override_colors/font_color = Color(0, 0, 0, 0.8)
-theme_override_fonts/font = ExtResource("2_bqqt6")
-theme_override_font_sizes/font_size = 48
-text = "Fantasy
-Lab"
-horizontal_alignment = 1
-
 [node name="Center" type="CenterContainer" parent="." unique_id=207291539]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -300.95502
+offset_top = -128.0
+offset_right = -300.95502
+offset_bottom = -128.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -107,7 +53,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 0.8)
 theme_override_fonts/font = ExtResource("2_bqqt6")
 theme_override_font_sizes/font_size = 48
-text = "Fantasy
+text = "Alchemy
 Lab"
 horizontal_alignment = 1
 
@@ -116,36 +62,38 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.19215687, 0.46666667, 1, 1)
 theme_override_fonts/font = ExtResource("3_wu84c")
 theme_override_font_sizes/font_size = 16
-text = "Combine elements.Discover secrets."
+text = "Combine elements. Discover their secrets."
 horizontal_alignment = 1
 
 [node name="Spacer" type="Control" parent="Center/VBox" unique_id=354996856]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 
-[node name="StartButton" type="Button" parent="Center/VBox" unique_id=601524026]
-custom_minimum_size = Vector2(240, 52)
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("3_wu84c")
-theme_override_font_sizes/font_size = 22
-theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
-theme_override_styles/hover = SubResource("StyleBoxFlat_wu84c")
-text = "Start Game"
-
-[node name="ExitButton" type="Button" parent="." unique_id=1696139570]
-layout_mode = 0
-offset_left = 574.0
-offset_top = 518.0
-offset_right = 703.0
-offset_bottom = 553.0
-theme_override_styles/normal = SubResource("StyleBoxFlat_8ln24")
-theme_override_styles/hover = SubResource("StyleBoxFlat_rtw2f")
-text = "Exit"
-
 [node name="Wizard" type="Sprite2D" parent="." unique_id=1226982727]
 position = Vector2(941, 420)
 texture = ExtResource("4_wu84c")
 
-[connection signal="pressed" from="Center/VBox/StartButton" to="." method="_on_start_button_pressed"]
+[node name="ExitButton" type="TextureButton" parent="." unique_id=416203377]
+layout_mode = 0
+offset_left = 207.0
+offset_top = 641.0
+offset_right = 475.0
+offset_bottom = 688.0
+texture_normal = ExtResource("5_rtw2f")
+texture_pressed = ExtResource("5_rtw2f")
+texture_hover = ExtResource("7_tbmy8")
+
+[node name="StartButton" type="TextureButton" parent="." unique_id=667858678]
+custom_minimum_size = Vector2(240, 52)
+layout_mode = 0
+offset_left = 90.0
+offset_top = 388.0
+offset_right = 358.0
+offset_bottom = 440.0
+scale = Vector2(2, 2)
+texture_normal = ExtResource("7_oa1go")
+texture_pressed = ExtResource("7_oa1go")
+texture_hover = ExtResource("9_jk1qb")
+
 [connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
