@@ -97,30 +97,26 @@ func _make_card(mat_id: String, discovered: bool) -> Control:
 	var display_name: String = _name_lookup.get(mat_id, mat_id.replace("_", " ").capitalize())
 
 	var card := Panel.new()
-	card.custom_minimum_size = Vector2(90, 84)
+	card.custom_minimum_size = Vector2(88, 88)
 
 	# Parchment-toned card background
 	var sbox := StyleBoxFlat.new()
 	sbox.bg_color     = Color(0.91, 0.83, 0.66) if discovered else Color(0.80, 0.71, 0.54)
 	sbox.border_color = Color(0.62, 0.44, 0.22) if discovered else Color(0.52, 0.38, 0.20, 0.7)
-	sbox.border_width_left   = 1
-	sbox.border_width_top    = 1
-	sbox.border_width_right  = 1
-	sbox.border_width_bottom = 1
-	sbox.corner_radius_top_left     = 4
-	sbox.corner_radius_top_right    = 4
-	sbox.corner_radius_bottom_right = 4
-	sbox.corner_radius_bottom_left  = 4
+	sbox.border_width_left   = 0
+	sbox.border_width_top    = 0
+	sbox.border_width_right  = 0
+	sbox.border_width_bottom = 0
+	sbox.corner_radius_top_left     = 5
+	sbox.corner_radius_top_right    = 5
+	sbox.corner_radius_bottom_right = 5
+	sbox.corner_radius_bottom_left  = 5
 	card.add_theme_stylebox_override("panel", sbox)
 
 	var vbox := VBoxContainer.new()
 	vbox.add_theme_constant_override("separation", 3)
 	card.add_child(vbox)
 	vbox.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT, Control.PRESET_MODE_MINSIZE, 5)
-
-	# Lore shown as tooltip on hover for discovered cards
-	if discovered and _lore.has(mat_id):
-		card.tooltip_text = _lore[mat_id]
 
 	# Swatch container — holds material icon + optional completion checkmark
 	var swatch_wrap := Control.new()
@@ -177,7 +173,7 @@ func _make_card(mat_id: String, discovered: bool) -> Control:
 	# Full-card completion overlay — dark layer over icon + label, checkmark centered on top
 	if discovered and total > 0 and found >= total:
 		var dark := ColorRect.new()
-		dark.color = Color(0, 0, 0, 0.5)
+		dark.color = Color(0, 0, 0, 0.0)
 		dark.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		dark.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 		card.add_child(dark)

@@ -74,7 +74,7 @@ func _add_list_entry(id: String) -> void:
 	var btn := Button.new()
 	btn.text = _pretty(id)
 	btn.alignment = HORIZONTAL_ALIGNMENT_LEFT
-	btn.custom_minimum_size = Vector2(0, 36)
+	btn.custom_minimum_size = Vector2(0, 30)
 	btn.pressed.connect(_spawn_in_zone.bind(id))
 	_material_list.add_child(btn)
 

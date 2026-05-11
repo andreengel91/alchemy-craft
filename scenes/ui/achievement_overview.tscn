@@ -1,8 +1,7 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://hlptojiwrj5i"]
 
-[ext_resource type="Script" path="res://scripts/achievement_overview.gd" id="1_ao"]
+[ext_resource type="Script" uid="uid://dvfti52hypjm8" path="res://scripts/achievement_overview.gd" id="1_ao"]
 [ext_resource type="FontFile" uid="uid://cg25qrbv8wds0" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="2_bold"]
-[ext_resource type="FontFile" uid="uid://bopv5stolxb5o" path="res://assets/fonts/PixelOperator8.ttf" id="3_reg"]
 
 [sub_resource type="StyleBoxFlat" id="SB_panel"]
 bg_color = Color(0.07, 0.05, 0.14, 0.97)
@@ -10,7 +9,7 @@ border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color(0.60, 0.48, 0.80, 1)
+border_color = Color(0.6, 0.48, 0.8, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
@@ -30,19 +29,7 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[sub_resource type="StyleBoxFlat" id="SB_row"]
-bg_color = Color(0.10, 0.07, 0.18, 0.80)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.30, 0.25, 0.42, 1)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-
-[node name="AchievementOverview" type="Control"]
+[node name="AchievementOverview" type="Control" unique_id=2031309675]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -51,42 +38,41 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ao")
 
-[node name="Overlay" type="ColorRect" parent="."]
+[node name="Overlay" type="ColorRect" parent="." unique_id=544869066]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 0
-color = Color(0, 0, 0, 0.65)
+color = Color(0, 0, 0, 0.7647059)
 
-[node name="PanelRoot" type="Panel" parent="."]
+[node name="PanelRoot" type="Panel" parent="." unique_id=1223894504]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.20
-anchor_top = 0.10
-anchor_right = 0.80
-anchor_bottom = 0.90
+anchor_left = 0.2
+anchor_top = 0.1
+anchor_right = 0.8
+anchor_bottom = 0.9
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("SB_panel")
 
-[node name="TitleBar" type="Label" parent="PanelRoot"]
+[node name="TitleBar" type="Label" parent="PanelRoot" unique_id=1307910225]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_top = 8.0
 offset_bottom = 36.0
 grow_horizontal = 2
-theme_override_colors/font_color = Color(1.0, 0.85, 0.20, 1)
+theme_override_colors/font_color = Color(1, 0.85, 0.2, 1)
 theme_override_fonts/font = ExtResource("2_bold")
 theme_override_font_sizes/font_size = 15
 text = "Achievements"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CloseButton" type="Button" parent="PanelRoot"]
+[node name="CloseButton" type="Button" parent="PanelRoot" unique_id=46093073]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -100,7 +86,7 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_styles/normal = SubResource("SB_btn")
 text = "✕"
 
-[node name="Scroll" type="ScrollContainer" parent="PanelRoot"]
+[node name="Scroll" type="ScrollContainer" parent="PanelRoot" unique_id=1796254038]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -112,7 +98,7 @@ offset_bottom = -12.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="AchievList" type="VBoxContainer" parent="PanelRoot/Scroll"]
+[node name="AchievList" type="VBoxContainer" parent="PanelRoot/Scroll" unique_id=472875963]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
