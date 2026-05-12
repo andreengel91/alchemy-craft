@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dk0isu6x65oxw" path="res://scripts/bestiary_panel.gd" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://wsiveeg760jf" path="res://assets/ui/bestiary_bg.png" id="2_668ox"]
 [ext_resource type="FontFile" uid="uid://cg25qrbv8wds0" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="2_bold"]
+[ext_resource type="Texture2D" uid="uid://dcmdswoyccg42" path="res://assets/ui/Overlay_Pages.png" id="4_6hino"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6hino"]
 texture = ExtResource("2_668ox")
@@ -73,12 +74,13 @@ alignment = 1
 [node name="LeftPage" type="VBoxContainer" parent="BookRoot/HBox" unique_id=1954389005]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
-size_flags_horizontal = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 6
 alignment = 1
 
 [node name="LeftTitle" type="Label" parent="BookRoot/HBox/LeftPage" unique_id=1223021462]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.3, 0.17, 0.03, 1)
@@ -133,15 +135,6 @@ size_flags_horizontal = 2
 size_flags_stretch_ratio = 2.0
 theme_override_constants/separation = 6
 alignment = 1
-
-[node name="RightTitle" type="Label" parent="BookRoot/HBox/RightPage" unique_id=806061038]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_colors/font_color = Color(0.3, 0.17, 0.03, 1)
-theme_override_fonts/font = ExtResource("2_bold")
-theme_override_font_sizes/font_size = 12
-text = "Unknown"
-horizontal_alignment = 1
 
 [node name="RightSep" type="ColorRect" parent="BookRoot/HBox/RightPage" unique_id=2097614172]
 visible = false
@@ -198,5 +191,39 @@ theme_override_styles/pressed = SubResource("SB_close_h")
 theme_override_styles/hover = SubResource("SB_close_h")
 theme_override_styles/focus = SubResource("SB_close_n")
 text = "✕"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1481510591]
+position = Vector2(640.00006, 113)
+scale = Vector2(1.1488888, 1.148889)
+texture = ExtResource("4_6hino")
+
+[node name="TitleBar2" type="Label" parent="." unique_id=1127979541]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 10.0
+offset_top = 22.0
+offset_right = -539.0
+offset_bottom = 52.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.8627451, 0.76862746, 0.6313726, 1)
+theme_override_fonts/font = ExtResource("2_bold")
+theme_override_font_sizes/font_size = 17
+text = "Discoverd"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RightTitle" type="Label" parent="." unique_id=806061038]
+layout_mode = 0
+offset_left = 757.02
+offset_top = 61.05
+offset_right = 1257.0205
+offset_bottom = 74.05
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.3, 0.17, 0.03, 1)
+theme_override_fonts/font = ExtResource("2_bold")
+theme_override_font_sizes/font_size = 12
+text = "Unknown"
+horizontal_alignment = 1
 
 [connection signal="pressed" from="BookRoot/CloseButton" to="." method="_on_close_button_pressed"]

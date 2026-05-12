@@ -6,6 +6,7 @@ const OVERLAP_DIST  := 52.0
 const HINT_COOLDOWN := 300.0  # 5 minutes in seconds
 
 @onready var _material_list:   VBoxContainer = %MaterialList
+@onready var _material_search: LineEdit      = %MaterialSearch
 @onready var _craft_zone:      Control       = %CraftZone
 @onready var _recipe_counter:  Label         = %RecipeCounter
 @onready var _bestiary_btn:    Button        = %BestiaryButton
@@ -13,11 +14,28 @@ const HINT_COOLDOWN := 300.0  # 5 minutes in seconds
 @onready var _hint_container:  Panel         = %HintContainer
 @onready var _hint_lbl:        Label         = %HintLabel
 
+@export var cauldron_quips: Array[String] = [
+	"Hey. I'm not doing anything here.",
+	"Just vibes. No crafting for me.",
+	"I contain multitudes. And water.",
+	"Don't look at me like that.",
+	"Decorative since forever.",
+	"Purely ornamental. Please stop staring.",
+	"I'm ambient. It's a job.",
+	"Yes, I'm a cauldron. No, I'm not useful.",
+]
+
+@onready var _cauldron_click_area: Control = %CauldronClickArea
+@onready var _cauldron_quip:       Panel   = %CauldronQuip
+@onready var _quip_label:          Label   = %QuipLabel
+
 var _db: Node = null
 var _hint_visible_timer: float = 0.0
 var _last_hint_display: String = ""
 var _bestiary_panel: Control = null
 var _lore: Dictionary = {}
+var _quip_tween: Tween = null
+var _quip_dismiss_timer: float = 0.0
 
 const MATERIAL_ITEM_SCRIPT := preload("res://scripts/material_item.gd")
 const _BESTIARY_SCENE      := preload("res://scenes/ui/bestiary_panel.tscn")
@@ -45,6 +63,9 @@ func _ready() -> void:
 	_db.set_script(preload("res://scripts/recipe_database.gd"))
 	add_child(_db)
 	_hint_container.visible = false
+	_cauldron_quip.visible = false
+	_cauldron_click_area.gui_input.connect(_on_cauldron_gui_input)
+	_material_search.text_changed.connect(_on_search_changed)
 	_refresh_list()
 	_update_recipe_counter()
 	_update_hint_button()
@@ -61,6 +82,10 @@ func _process(delta: float) -> void:
 		if _hint_visible_timer <= 0.0:
 			_fade_out_hint()
 	_update_hint_button()
+	if _cauldron_quip.visible and _quip_dismiss_timer > 0.0:
+		_quip_dismiss_timer -= delta
+		if _quip_dismiss_timer <= 0.0:
+			_dismiss_quip()
 
 # ── Materials list (left panel) ───────────────────────────────────────────────
 
@@ -77,6 +102,14 @@ func _add_list_entry(id: String) -> void:
 	btn.custom_minimum_size = Vector2(0, 30)
 	btn.pressed.connect(_spawn_in_zone.bind(id))
 	_material_list.add_child(btn)
+	var q := _material_search.text.strip_edges().to_lower()
+	if not q.is_empty():
+		btn.visible = btn.text.to_lower().contains(q)
+
+func _on_search_changed(query: String) -> void:
+	var q := query.strip_edges().to_lower()
+	for btn in _material_list.get_children():
+		btn.visible = q.is_empty() or (btn as Button).text.to_lower().contains(q)
 
 # ── Craft zone ────────────────────────────────────────────────────────────────
 
@@ -247,6 +280,38 @@ func _show_lore_toast(mat_id: String, mat_name: String) -> void:
 	var toast: Node = _LORE_TOAST_SCENE.instantiate()
 	get_tree().root.add_child(toast)
 	toast.call("setup", mat_name, lore_text)
+
+# ── Cauldron quips ────────────────────────────────────────────────────────────
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		if _cauldron_quip.visible:
+			_dismiss_quip()
+
+func _on_cauldron_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		_show_quip()
+		get_viewport().set_input_as_handled()
+
+func _show_quip() -> void:
+	if cauldron_quips.is_empty():
+		return
+	if _quip_tween:
+		_quip_tween.kill()
+	_quip_label.text = cauldron_quips[randi() % cauldron_quips.size()]
+	_cauldron_quip.scale = Vector2.ZERO
+	_cauldron_quip.visible = true
+	_quip_tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
+	_quip_tween.tween_property(_cauldron_quip, "scale", Vector2.ONE, 0.2)
+	_quip_dismiss_timer = 2.5
+
+func _dismiss_quip() -> void:
+	_quip_dismiss_timer = 0.0
+	if _quip_tween:
+		_quip_tween.kill()
+	_quip_tween = create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_BACK)
+	_quip_tween.tween_property(_cauldron_quip, "scale", Vector2.ZERO, 0.15)
+	_quip_tween.finished.connect(func(): _cauldron_quip.visible = false, CONNECT_ONE_SHOT)
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
 

@@ -171,7 +171,7 @@ func _make_card(mat_id: String, discovered: bool) -> Control:
 		vbox.add_child(ctr)
 
 	# Full-card completion overlay — dark layer over icon + label, checkmark centered on top
-	if discovered and total > 0 and found >= total:
+	if discovered and (total == 0 or found >= total):
 		var dark := ColorRect.new()
 		dark.color = Color(0, 0, 0, 0.0)
 		dark.mouse_filter = Control.MOUSE_FILTER_IGNORE
