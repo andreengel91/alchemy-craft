@@ -15,7 +15,7 @@ func setup(mat_name: String, lore_text: String) -> void:
 
 	var vp   := get_viewport().get_visible_rect().size
 	var pw   := _panel.custom_minimum_size.x
-	_panel.position = Vector2((vp.x - pw) * 0.68, vp.y - 75.0)
+	_panel.position = Vector2((vp.x - pw) * 0.5, vp.y - 60.0)
 	_panel.modulate.a = 0.0
 
 	var tw := create_tween()

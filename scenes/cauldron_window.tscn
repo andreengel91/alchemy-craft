@@ -74,6 +74,35 @@ corner_radius_bottom_left = 4
 bg_color = Color(0, 0.40018785, 1, 0)
 border_color = Color(0.4509804, 0.4509804, 0.4509804, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_search"]
+content_margin_left = 6.0
+content_margin_top = 3.0
+content_margin_right = 6.0
+content_margin_bottom = 3.0
+bg_color = Color(0.1764706, 0.15294118, 0.12156863, 0.92156863)
+border_width_bottom = 1
+border_color = Color(0.54901963, 0.34901962, 0.14901961, 0.5)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_search_focus"]
+content_margin_left = 6.0
+content_margin_top = 3.0
+content_margin_right = 6.0
+content_margin_bottom = 3.0
+bg_color = Color(0.1764706, 0.15294118, 0.12156863, 0.92)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.54901963, 0.34901962, 0.14901961, 0.85)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_quip"]
 bg_color = Color(0.94509804, 0.8666667, 0.7058824, 0.97)
 border_width_left = 1
@@ -111,35 +140,6 @@ corner_radius_bottom_left = 4
 bg_color = Color(0.6520751, 0.48654836, 0.34930497, 1)
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_search"]
-bg_color = Color(0.17647059, 0.15294118, 0.12156863, 0.92)
-border_width_bottom = 1
-border_color = Color(0.54901963, 0.34901962, 0.14901961, 0.5)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-content_margin_left = 6.0
-content_margin_top = 3.0
-content_margin_right = 6.0
-content_margin_bottom = 3.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_search_focus"]
-bg_color = Color(0.17647059, 0.15294118, 0.12156863, 0.92)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.54901963, 0.34901962, 0.14901961, 0.85)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-content_margin_left = 6.0
-content_margin_top = 3.0
-content_margin_right = 6.0
-content_margin_bottom = 3.0
 
 [node name="CauldronWindow" type="Control" unique_id=260319833]
 layout_mode = 3
@@ -256,7 +256,7 @@ offset_right = 2.0
 offset_bottom = -6.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 6
+theme_override_constants/separation = 4
 
 [node name="ListTitle" type="Label" parent="WindowPanel/HBox/LeftPanel/VBox" unique_id=1783388288]
 visible = false
@@ -272,10 +272,10 @@ vertical_alignment = 1
 visible = false
 layout_mode = 2
 
-[node name="MaterialSearch" type="LineEdit" parent="WindowPanel/HBox/LeftPanel/VBox"]
+[node name="MaterialSearch" type="LineEdit" parent="WindowPanel/HBox/LeftPanel/VBox" unique_id=289193653]
 unique_name_in_owner = true
-layout_mode = 2
 custom_minimum_size = Vector2(0, 22)
+layout_mode = 2
 theme_override_colors/font_color = Color(0.8627451, 0.76862746, 0.6313726, 1)
 theme_override_colors/font_placeholder_color = Color(0.8627451, 0.76862746, 0.6313726, 0.4)
 theme_override_colors/caret_color = Color(0.8627451, 0.76862746, 0.6313726, 1)
@@ -283,8 +283,8 @@ theme_override_colors/selection_color = Color(0.54901963, 0.34901962, 0.14901961
 theme_override_fonts/font = ExtResource("3_vbrxh")
 theme_override_font_sizes/font_size = 9
 theme_override_styles/normal = SubResource("StyleBoxFlat_search")
-theme_override_styles/focus = SubResource("StyleBoxFlat_search_focus")
 theme_override_styles/read_only = SubResource("StyleBoxFlat_search")
+theme_override_styles/focus = SubResource("StyleBoxFlat_search_focus")
 placeholder_text = "Search…"
 
 [node name="Scroll" type="ScrollContainer" parent="WindowPanel/HBox/LeftPanel/VBox" unique_id=1325237342]
@@ -405,9 +405,9 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="CauldronClickArea" type="Control" parent="WindowPanel/HBox/RightPanel/CraftZone"]
+[node name="CauldronClickArea" type="Control" parent="WindowPanel/HBox/RightPanel/CraftZone" unique_id=1345865360]
 unique_name_in_owner = true
-layout_mode = 0
+anchors_preset = 0
 offset_left = 155.0
 offset_top = 365.0
 offset_right = 345.0

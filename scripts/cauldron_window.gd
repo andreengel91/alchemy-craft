@@ -100,7 +100,22 @@ func _add_list_entry(id: String) -> void:
 	btn.text = _pretty(id)
 	btn.alignment = HORIZONTAL_ALIGNMENT_LEFT
 	btn.custom_minimum_size = Vector2(0, 30)
+	btn.focus_mode = Control.FOCUS_NONE
 	btn.pressed.connect(_spawn_in_zone.bind(id))
+
+	var _sbox := func(r: float, g: float, b: float) -> StyleBoxFlat:
+		var s := StyleBoxFlat.new()
+		s.bg_color = Color(r, g, b)
+		s.content_margin_left = 6.0
+		return s
+
+	btn.add_theme_stylebox_override("normal",  _sbox.call(0.80, 0.71, 0.54))
+	btn.add_theme_stylebox_override("hover",   _sbox.call(0.86, 0.77, 0.63))
+	btn.add_theme_stylebox_override("pressed", _sbox.call(0.80, 0.71, 0.54))
+	btn.add_theme_stylebox_override("focus",   _sbox.call(0.22, 0.16, 0.10))
+	btn.add_theme_color_override("font_color",         Color(0.62, 0.44, 0.22))
+	btn.add_theme_color_override("font_hover_color",   Color(0.62, 0.44, 0.22))
+	btn.add_theme_color_override("font_pressed_color", Color(0.62, 0.44, 0.22))
 	_material_list.add_child(btn)
 	var q := _material_search.text.strip_edges().to_lower()
 	if not q.is_empty():

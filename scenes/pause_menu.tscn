@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://bje0ed8yc1st5" path="res://assets/ui/btn_reset_hover.png" id="9_rsh"]
 [ext_resource type="Texture2D" uid="uid://uhmxle0dxakt" path="res://assets/ui/btn_quit_normal.png" id="10_71k7c"]
 [ext_resource type="Texture2D" uid="uid://cvous1c1cerm" path="res://assets/ui/btn_quit_hover.png" id="11_cmnsq"]
+[ext_resource type="FontFile" uid="uid://bopv5stolxb5o" path="res://assets/fonts/PixelOperator8.ttf" id="12_ofnjo"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
 bg_color = Color(0.08, 0.06, 0.13, 0.98)
@@ -24,6 +25,39 @@ corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 shadow_size = 20
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_cmnsq"]
+color = Color(0.6117647, 0.43529412, 0.29411766, 1)
+grow_begin = -10.0
+grow_end = -10.0
+thickness = 14
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cmnsq"]
+bg_color = Color(0.7764706, 0.6039216, 0.4627451, 1)
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+expand_margin_right = 7.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1rgno"]
+bg_color = Color(0.72156864, 0.54901963, 0.40392157, 1)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_ofnjo"]
+color = Color(0.6117647, 0.43529412, 0.29411766, 1)
+grow_begin = 0.0
+grow_end = -10.0
+thickness = 14
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ofnjo"]
+bg_color = Color(0.7764706, 0.6039216, 0.4627451, 1)
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+expand_margin_right = 7.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4hnlu"]
+bg_color = Color(0.72156864, 0.54901963, 0.40392157, 1)
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+expand_margin_right = 7.0
 
 [node name="PauseMenu" type="Control" unique_id=1196018452]
 layout_mode = 3
@@ -45,14 +79,15 @@ color = Color(0, 0, 0, 0.7647059)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1450898947]
 position = Vector2(641.045, 356.405)
+scale = Vector2(1.2, 1.2)
 texture = ExtResource("2_knqa7")
 
 [node name="Title2" type="Label" parent="." unique_id=378874352]
 layout_mode = 0
 offset_left = 538.0
-offset_top = 63.300003
+offset_top = 39.300003
 offset_right = 742.0
-offset_bottom = 136.3
+offset_bottom = 112.3
 theme_override_colors/font_color = Color(0, 0, 0, 0.8)
 theme_override_fonts/font = ExtResource("2_myx47")
 theme_override_font_sizes/font_size = 34
@@ -63,9 +98,9 @@ horizontal_alignment = 1
 [node name="Title" type="Label" parent="." unique_id=561879607]
 layout_mode = 0
 offset_left = 538.0
-offset_top = 58.0
+offset_top = 34.0
 offset_right = 742.0
-offset_bottom = 131.00009
+offset_bottom = 107.00009
 theme_override_colors/font_color = Color(1, 1, 1, 0.8)
 theme_override_fonts/font = ExtResource("2_myx47")
 theme_override_font_sizes/font_size = 34
@@ -148,7 +183,99 @@ texture_normal = ExtResource("10_71k7c")
 texture_pressed = ExtResource("10_71k7c")
 texture_hover = ExtResource("11_cmnsq")
 
+[node name="AudioSep" type="HSeparator" parent="Center/Panel/Margin/VBox" unique_id=2128758968]
+modulate = Color(0.54901963, 0.34901962, 0.8509804, 0)
+layout_mode = 2
+
+[node name="AudioLabel" type="Label" parent="Center/Panel/Margin/VBox" unique_id=1554257327]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6117647, 0.43529412, 0.29411766, 1)
+theme_override_fonts/font = ExtResource("2_myx47")
+theme_override_font_sizes/font_size = 11
+text = "Audio Settings"
+horizontal_alignment = 1
+
+[node name="MusicRow" type="HBoxContainer" parent="Center/Panel/Margin/VBox" unique_id=1213725583]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="MusicLabel" type="Label" parent="Center/Panel/Margin/VBox/MusicRow" unique_id=580188619]
+custom_minimum_size = Vector2(52, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6117647, 0.43529412, 0.29411766, 1)
+theme_override_font_sizes/font_size = 10
+text = "Music"
+
+[node name="MusicSlider" type="HSlider" parent="Center/Panel/Margin/VBox/MusicRow" unique_id=976126034]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/slider = SubResource("StyleBoxLine_cmnsq")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_cmnsq")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_1rgno")
+max_value = 1.0
+step = 0.01
+value = 0.8
+
+[node name="MusicMute" type="CheckBox" parent="Center/Panel/Margin/VBox/MusicRow" unique_id=918878767]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.6117647, 0.43529412, 0.29411766, 1)
+theme_override_colors/font_focus_color = Color(0.6117647, 0.43529412, 0.29411766, 1)
+theme_override_colors/font_pressed_color = Color(0.6117647, 0.43529412, 0.29411766, 1)
+theme_override_colors/font_hover_color = Color(0.72156864, 0.54901963, 0.40392157, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.72156864, 0.54901963, 0.40392157, 1)
+theme_override_fonts/font = ExtResource("12_ofnjo")
+theme_override_font_sizes/font_size = 10
+theme_override_colors/checkbox_checked_color = Color(0.6117647, 0.43529412, 0.29411766, 1)
+text = "Mute"
+
+[node name="SFXRow" type="HBoxContainer" parent="Center/Panel/Margin/VBox" unique_id=1509782580]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="SFXLabel" type="Label" parent="Center/Panel/Margin/VBox/SFXRow" unique_id=625540051]
+custom_minimum_size = Vector2(52, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6117647, 0.43529412, 0.29411766, 1)
+theme_override_font_sizes/font_size = 10
+text = "Sounds"
+
+[node name="SFXSlider" type="HSlider" parent="Center/Panel/Margin/VBox/SFXRow" unique_id=1771299300]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/slider = SubResource("StyleBoxLine_ofnjo")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_ofnjo")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_4hnlu")
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="SFXMute" type="CheckBox" parent="Center/Panel/Margin/VBox/SFXRow" unique_id=1120490216]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.6117647, 0.43529412, 0.29411766, 1)
+theme_override_colors/font_focus_color = Color(0.6117647, 0.43529412, 0.29411766, 1)
+theme_override_colors/font_pressed_color = Color(0.6117647, 0.43529412, 0.29411766, 1)
+theme_override_colors/font_hover_color = Color(0.72156864, 0.54901963, 0.40392157, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.72156864, 0.54901963, 0.40392157, 1)
+theme_override_fonts/font = ExtResource("12_ofnjo")
+theme_override_font_sizes/font_size = 10
+theme_override_colors/checkbox_checked_color = Color(0.6117647, 0.43529412, 0.29411766, 1)
+text = "Mute"
+
 [connection signal="pressed" from="Center/Panel/Margin/VBox/ResumeButton" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="Center/Panel/Margin/VBox/AchievementsButton" to="." method="_on_achievements_pressed"]
 [connection signal="pressed" from="Center/Panel/Margin/VBox/ResetButton" to="." method="_on_reset_pressed"]
 [connection signal="pressed" from="Center/Panel/Margin/VBox/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="value_changed" from="Center/Panel/Margin/VBox/MusicRow/MusicSlider" to="." method="_on_music_slider_changed"]
+[connection signal="toggled" from="Center/Panel/Margin/VBox/MusicRow/MusicMute" to="." method="_on_music_mute_toggled"]
+[connection signal="value_changed" from="Center/Panel/Margin/VBox/SFXRow/SFXSlider" to="." method="_on_sfx_slider_changed"]
+[connection signal="toggled" from="Center/Panel/Margin/VBox/SFXRow/SFXMute" to="." method="_on_sfx_mute_toggled"]
