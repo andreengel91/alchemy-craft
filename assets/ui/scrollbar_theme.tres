@@ -1,0 +1,27 @@
+[gd_resource type="Theme" format=3 uid="uid://dh8lwvkk7agww"]
+
+[ext_resource type="Texture2D" uid="uid://cu53lblglc0we" path="res://assets/ui/scrollbar_track.png" id="1_track"]
+[ext_resource type="Texture2D" uid="uid://o6a8t861mbqm" path="res://assets/ui/scrollbar_grabber.png" id="2_grab"]
+[ext_resource type="Texture2D" uid="uid://cwhfe4mb7xm3l" path="res://assets/ui/scrollbar_grabber_hover.png" id="3_hover"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_grab"]
+texture = ExtResource("2_grab")
+texture_margin_left = 6.0
+texture_margin_right = 6.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hover"]
+texture = ExtResource("3_hover")
+texture_margin_left = 6.0
+texture_margin_right = 6.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_track"]
+texture = ExtResource("1_track")
+texture_margin_left = 6.0
+texture_margin_right = 6.0
+
+[resource]
+VScrollBar/styles/grabber = SubResource("StyleBoxTexture_grab")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxTexture_hover")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxTexture_hover")
+VScrollBar/styles/scroll = SubResource("StyleBoxTexture_track")
+VScrollBar/styles/scroll_focus = SubResource("StyleBoxTexture_track")

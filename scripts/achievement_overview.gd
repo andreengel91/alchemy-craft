@@ -32,7 +32,7 @@ func _make_row(id: String) -> Control:
 	row.custom_minimum_size = Vector2(0, 56)
 
 	var sbox := StyleBoxFlat.new()
-	sbox.bg_color = Color(0.776, 0.604, 0.463, 1.0) if done else Color(0.612, 0.435, 0.294, 0.604)
+	sbox.bg_color = Color(0.80, 0.71, 0.54) if done else Color(0.612, 0.435, 0.294, 0.604)
 	sbox.border_width_left   = 0
 	sbox.border_width_top    = 0
 	sbox.border_width_right  = 0

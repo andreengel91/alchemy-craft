@@ -1,15 +1,17 @@
 [gd_scene format=3 uid="uid://hlptojiwrj5i"]
 
 [ext_resource type="Script" uid="uid://dvfti52hypjm8" path="res://scripts/achievement_overview.gd" id="1_ao"]
-[ext_resource type="Texture2D" uid="uid://dcmdswoyccg42" path="res://assets/ui/Overlay_Pages.png" id="2_1tqw5"]
+[ext_resource type="Texture2D" uid="uid://crtln274qqq4v" path="res://assets/ui/Overlay_Achievements.png" id="2_1tqw5"]
+[ext_resource type="Texture2D" uid="uid://cr7akhvupbdoh" path="res://assets/ui/achievements_bg.png" id="2_567au"]
 [ext_resource type="FontFile" uid="uid://cg25qrbv8wds0" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="2_bold"]
+[ext_resource type="Texture2D" uid="uid://b17uto5ricr0p" path="res://assets/ui/stange-lang.png" id="4_jf0o8"]
+[ext_resource type="Texture2D" uid="uid://ba0uegi8tr2qq" path="res://assets/ui/lower-stange.png" id="6_vrnbx"]
+[ext_resource type="Theme" uid="uid://dh8lwvkk7agww" path="res://assets/ui/scrollbar_theme.tres" id="theme_sb"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vrnbx"]
-bg_color = Color(0.8627451, 0.76862746, 0.6313726, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_37hpc"]
+texture = ExtResource("2_567au")
+expand_margin_left = 40.0
+expand_margin_right = 40.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bar_bg"]
 bg_color = Color(0.35, 0.25, 0.12, 0.45)
@@ -74,7 +76,7 @@ anchor_bottom = 0.9
 offset_top = 17.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_vrnbx")
+theme_override_styles/panel = SubResource("StyleBoxTexture_37hpc")
 
 [node name="Scroll" type="ScrollContainer" parent="PanelRoot" unique_id=1796254038]
 layout_mode = 1
@@ -87,6 +89,7 @@ offset_right = -12.0
 offset_bottom = -12.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("theme_sb")
 
 [node name="AchievList" type="VBoxContainer" parent="PanelRoot/Scroll" unique_id=472875963]
 unique_name_in_owner = true
@@ -94,19 +97,25 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 8
 
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=1684981749]
+position = Vector2(255, 379)
+rotation = 1.5707964
+scale = Vector2(1.275486, 1)
+texture = ExtResource("4_jf0o8")
+
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=837576383]
-position = Vector2(634, 147.4375)
-scale = Vector2(0.955, 0.955)
+position = Vector2(637, 150)
+scale = Vector2(0.95, 0.95)
 texture = ExtResource("2_1tqw5")
 
 [node name="CounterBox" type="VBoxContainer" parent="." unique_id=909035767]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_left = 828.0
-offset_top = 99.0
-offset_right = -252.0
-offset_bottom = 118.0
+offset_left = 843.205
+offset_top = 102.385
+offset_right = -236.79468
+offset_bottom = 121.385
 grow_horizontal = 2
 theme_override_constants/separation = 4
 
@@ -131,15 +140,19 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_bar_fill")
 max_value = 1.0
 show_percentage = false
 
+[node name="Sprite2D9" type="Sprite2D" parent="CounterBox" unique_id=366189822]
+position = Vector2(-356.20502, 545.615)
+texture = ExtResource("6_vrnbx")
+
 [node name="CloseButton" type="Button" parent="." unique_id=46093073]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -282.0
-offset_top = 92.4375
-offset_right = -250.0
-offset_bottom = 124.4375
+offset_left = -42.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 42.0
 grow_horizontal = 0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_hover_color = Color(0.99607843, 0.8745098, 0.7921569, 1)

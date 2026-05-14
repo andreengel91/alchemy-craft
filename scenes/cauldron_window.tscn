@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://df7r7dani3r3w" path="res://assets/sprites/CauldronHD.png" id="5_hhpiv"]
 [ext_resource type="Texture2D" uid="uid://d1ibbayf2r83u" path="res://assets/ui/watermark_cauldron_window.png" id="6_tqf8v"]
 [ext_resource type="Texture2D" uid="uid://dcmdswoyccg42" path="res://assets/ui/Overlay_Pages.png" id="7_hv7bl"]
+[ext_resource type="Texture2D" uid="uid://ba0uegi8tr2qq" path="res://assets/ui/lower-stange.png" id="8_japh0"]
+[ext_resource type="Theme" uid="uid://dh8lwvkk7agww" path="res://assets/ui/scrollbar_theme.tres" id="theme_sb"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hhpiv"]
 texture = ExtResource("2_vbrxh")
@@ -32,9 +34,10 @@ bg_color = Color(0.7764706, 0.6039216, 0.4627451, 1)
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j7aex"]
 bg_color = Color(0.7764706, 0.6039216, 0.4627451, 1)
-border_color = Color(0, 0.1882353, 0.54901963, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
@@ -45,8 +48,8 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hv7bl"]
-bg_color = Color(0.54901963, 0.34901962, 0.14901961, 0.5176471)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hhpiv"]
+bg_color = Color(0.7764706, 0.6039216, 0.4627451, 1)
 corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
@@ -54,17 +57,6 @@ corner_radius_bottom_left = 4
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1pryo"]
 bg_color = Color(0.94509804, 0.8666667, 0.7058824, 1)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j7aex"]
-bg_color = Color(0.7764706, 0.6039216, 0.4627451, 1)
-corner_radius_bottom_left = 4
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hhpiv"]
-bg_color = Color(0.7764706, 0.6039216, 0.4627451, 1)
 corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
@@ -117,6 +109,12 @@ corner_radius_bottom_left = 6
 shadow_color = Color(0, 0, 0, 0.3)
 shadow_size = 3
 shadow_offset = Vector2(0, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn"]
+bg_color = Color(0.7764706, 0.6039216, 0.4627451, 1)
+border_color = Color(0, 0.1882353, 0.54901963, 1)
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tqf8v"]
 bg_color = Color(0.72156864, 0.54901963, 0.40392157, 1)
@@ -192,33 +190,15 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_gea43")
 icon = ExtResource("4_1pryo")
 icon_alignment = 1
 
-[node name="CloseButton" type="Button" parent="WindowPanel" unique_id=1844970961]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -32.0
-offset_top = -23.0
-offset_right = -7.0
-offset_bottom = 2.0
-grow_horizontal = 0
-theme_override_colors/font_color = Color(0.4, 0.21960784, 0.05882353, 1)
-theme_override_colors/font_hover_color = Color(0.6509804, 0.34901962, 0.078431375, 1)
-theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_vbrxh")
-theme_override_styles/hover = SubResource("StyleBoxFlat_hv7bl")
-theme_override_styles/focus = SubResource("StyleBoxFlat_1pryo")
-text = "✕"
-
 [node name="CloseButton2" type="Button" parent="WindowPanel" unique_id=215932883]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -32.0
-offset_top = -23.0
-offset_right = -7.0
-offset_bottom = 2.0
+offset_left = 60.0
+offset_top = -50.0
+offset_right = 92.0
+offset_bottom = -18.0
 grow_horizontal = 0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_hover_color = Color(0.99462754, 0.8731563, 0.79264945, 1)
@@ -290,6 +270,7 @@ placeholder_text = "Search…"
 [node name="Scroll" type="ScrollContainer" parent="WindowPanel/HBox/LeftPanel/VBox" unique_id=1325237342]
 layout_mode = 2
 size_flags_vertical = 3
+theme = ExtResource("theme_sb")
 
 [node name="MaterialList" type="VBoxContainer" parent="WindowPanel/HBox/LeftPanel/VBox/Scroll" unique_id=1039033686]
 unique_name_in_owner = true
@@ -463,6 +444,10 @@ theme_override_font_sizes/font_size = 9
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Sprite2D9" type="Sprite2D" parent="." unique_id=2125630485]
+position = Vector2(477, 662)
+texture = ExtResource("8_japh0")
+
 [node name="Sprite2D2" type="Sprite2D" parent="." unique_id=877072206]
 position = Vector2(367.84, 142)
 texture = ExtResource("6_tqf8v")
@@ -556,7 +541,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [connection signal="pressed" from="WindowPanel/BestiaryButton" to="." method="_on_bestiary_btn_pressed"]
-[connection signal="pressed" from="WindowPanel/CloseButton" to="." method="_on_close_button_pressed"]
 [connection signal="pressed" from="WindowPanel/CloseButton2" to="." method="_on_close_button_pressed"]
 [connection signal="pressed" from="WindowPanel/HBox/RightPanel/ClearButton" to="." method="_on_clear_button_pressed"]
 [connection signal="pressed" from="TitleBar2/HintButton" to="." method="_on_hint_btn_pressed"]

@@ -4,26 +4,24 @@
 [ext_resource type="FontFile" uid="uid://cg25qrbv8wds0" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="2_bold"]
 [ext_resource type="FontFile" uid="uid://bopv5stolxb5o" path="res://assets/fonts/PixelOperator8.ttf" id="3_reg"]
 
-[sub_resource type="StyleBoxFlat" id="SB_popup"]
-bg_color = Color(0.07, 0.04, 0.14, 0.97)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.85, 0.65, 0.15, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jjkfu"]
+bg_color = Color(0.8627451, 0.76862746, 0.6313726, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.7764706, 0.6039216, 0.4627451, 1)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
-shadow_color = Color(0, 0, 0, 0.55)
-shadow_size = 12
 
 [node name="AchievementPopup" type="CanvasLayer" unique_id=824839365]
 script = ExtResource("1_ap")
 
 [node name="Panel" type="Panel" parent="." unique_id=1561888563]
 custom_minimum_size = Vector2(300, 80)
-theme_override_styles/panel = SubResource("SB_popup")
+theme_override_styles/panel = SubResource("StyleBoxFlat_jjkfu")
 
 [node name="HBox" type="HBoxContainer" parent="Panel" unique_id=711967950]
 layout_mode = 1
@@ -40,6 +38,7 @@ theme_override_constants/separation = 10
 
 [node name="IconLabel" type="Label" parent="Panel/HBox" unique_id=2078785221]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.7764706, 0.6039216, 0.4627451, 1)
 theme_override_font_sizes/font_size = 22
 text = "★"
 vertical_alignment = 1

@@ -3,7 +3,9 @@
 [ext_resource type="Script" uid="uid://dk0isu6x65oxw" path="res://scripts/bestiary_panel.gd" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://wsiveeg760jf" path="res://assets/ui/bestiary_bg.png" id="2_668ox"]
 [ext_resource type="FontFile" uid="uid://cg25qrbv8wds0" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="2_bold"]
-[ext_resource type="Texture2D" uid="uid://dcmdswoyccg42" path="res://assets/ui/Overlay_Pages.png" id="4_6hino"]
+[ext_resource type="Texture2D" uid="uid://df2a4ms1yanir" path="res://assets/ui/Overlay_Bestiary.png" id="4_6hino"]
+[ext_resource type="Texture2D" uid="uid://ba0uegi8tr2qq" path="res://assets/ui/lower-stange.png" id="5_sp27r"]
+[ext_resource type="Theme" uid="uid://dh8lwvkk7agww" path="res://assets/ui/scrollbar_theme.tres" id="theme_sb"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6hino"]
 texture = ExtResource("2_668ox")
@@ -15,11 +17,15 @@ expand_margin_bottom = 25.0
 [sub_resource type="StyleBoxFlat" id="SB_close_n"]
 bg_color = Color(0.7764706, 0.6039216, 0.4627451, 1)
 border_color = Color(0.8001019, 0.8001019, 0.8001019, 0)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
 [sub_resource type="StyleBoxFlat" id="SB_close_h"]
 bg_color = Color(0.7764706, 0.6039216, 0.4627451, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
@@ -100,6 +106,7 @@ color = Color(0.5, 0.34, 0.14, 0.5)
 [node name="LeftScroll" type="ScrollContainer" parent="BookRoot/HBox/LeftPage" unique_id=1908735816]
 layout_mode = 2
 size_flags_vertical = 3
+theme = ExtResource("theme_sb")
 scroll_hint_mode = 1
 
 [node name="LeftGrid" type="GridContainer" parent="BookRoot/HBox/LeftPage/LeftScroll" unique_id=1497703119]
@@ -148,6 +155,7 @@ custom_minimum_size = Vector2(445, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource("theme_sb")
 scroll_hint_mode = 1
 
 [node name="RightContent" type="VBoxContainer" parent="BookRoot/HBox/RightPage/RightScroll" unique_id=1063858479]
@@ -179,10 +187,10 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -32.0
-offset_top = -23.0
-offset_right = -7.0
-offset_bottom = 2.0
+offset_left = 60.0
+offset_top = -50.0
+offset_right = 92.0
+offset_bottom = -18.0
 grow_horizontal = 0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_hover_color = Color(0.99607843, 0.8745098, 0.7921569, 1)
@@ -191,6 +199,10 @@ theme_override_styles/pressed = SubResource("SB_close_h")
 theme_override_styles/hover = SubResource("SB_close_h")
 theme_override_styles/focus = SubResource("SB_close_n")
 text = "✕"
+
+[node name="Sprite2D9" type="Sprite2D" parent="BookRoot/CloseButton" unique_id=1216441665]
+position = Vector2(-488, 652)
+texture = ExtResource("5_sp27r")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1481510591]
 position = Vector2(640.00006, 113)
