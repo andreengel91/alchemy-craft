@@ -1,6 +1,7 @@
 extends Control
 
 func _on_start_button_pressed() -> void:
+	SFXManager.play_transition()
 	TransitionManager.pixelate_to("res://scenes/main_game.tscn")
 
 

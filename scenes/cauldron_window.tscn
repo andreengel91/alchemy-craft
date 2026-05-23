@@ -2,35 +2,34 @@
 
 [ext_resource type="Script" uid="uid://ul7g0comhpgw" path="res://scripts/cauldron_window.gd" id="1_cw01"]
 [ext_resource type="FontFile" uid="uid://cg25qrbv8wds0" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="2_cq7gh"]
-[ext_resource type="Texture2D" uid="uid://wsiveeg760jf" path="res://assets/ui/bestiary_bg.png" id="2_vbrxh"]
+[ext_resource type="Texture2D" uid="uid://cqna2eptvcdv1" path="res://assets/ui/cauldron_bg.png" id="2_japh0"]
 [ext_resource type="FontFile" uid="uid://bopv5stolxb5o" path="res://assets/fonts/PixelOperator8.ttf" id="3_vbrxh"]
 [ext_resource type="Texture2D" uid="uid://c7f6jyx7t5md0" path="res://assets/ui/book.png" id="4_1pryo"]
 [ext_resource type="Texture2D" uid="uid://df7r7dani3r3w" path="res://assets/sprites/CauldronHD.png" id="5_hhpiv"]
 [ext_resource type="Texture2D" uid="uid://d1ibbayf2r83u" path="res://assets/ui/watermark_cauldron_window.png" id="6_tqf8v"]
 [ext_resource type="Texture2D" uid="uid://dcmdswoyccg42" path="res://assets/ui/Overlay_Pages.png" id="7_hv7bl"]
-[ext_resource type="Texture2D" uid="uid://ba0uegi8tr2qq" path="res://assets/ui/lower-stange.png" id="8_japh0"]
 [ext_resource type="Theme" uid="uid://dh8lwvkk7agww" path="res://assets/ui/scrollbar_theme.tres" id="theme_sb"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hhpiv"]
-texture = ExtResource("2_vbrxh")
+texture = ExtResource("2_japh0")
 expand_margin_left = 45.0
 expand_margin_top = 25.0
 expand_margin_right = 45.0
 expand_margin_bottom = 25.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u7i28"]
-bg_color = Color(0.7764706, 0.6039216, 0.4627451, 1)
+bg_color = Color(0.8117647, 0.7176471, 0.54509807, 1)
 border_color = Color(0, 0.1882353, 0.54901963, 1)
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_japh0"]
-bg_color = Color(0.7764706, 0.6039216, 0.4627451, 1)
+bg_color = Color(0.5647059, 0.4745098, 0.3647059, 1)
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gea43"]
-bg_color = Color(0.7764706, 0.6039216, 0.4627451, 1)
+bg_color = Color(0.8117647, 0.7176471, 0.54509807, 1)
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 
@@ -111,8 +110,13 @@ shadow_size = 3
 shadow_offset = Vector2(0, 2)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn"]
-bg_color = Color(0.7764706, 0.6039216, 0.4627451, 1)
+bg_color = Color(0.8117647, 0.7176471, 0.54509807, 1)
 border_color = Color(0, 0.1882353, 0.54901963, 1)
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ulfgo"]
+bg_color = Color(0.7764706, 0.6039216, 0.4627451, 1)
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
@@ -122,7 +126,7 @@ corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hint"]
-bg_color = Color(0.25882354, 0.23137255, 0.1882353, 0.87058824)
+bg_color = Color(0.25766784, 0.23209421, 0.1897483, 0.69900006)
 shadow_color = Color(0, 0, 0, 0.22745098)
 shadow_offset = Vector2(0, 4)
 
@@ -130,7 +134,7 @@ shadow_offset = Vector2(0, 4)
 bg_color = Color(0.6509804, 0.4862745, 0.34901962, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j37f8"]
-bg_color = Color(0.7764706, 0.6039216, 0.4627451, 1)
+bg_color = Color(0.67058825, 0.49803922, 0.35686275, 1)
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
@@ -138,6 +142,15 @@ corner_radius_bottom_left = 4
 bg_color = Color(0.6520751, 0.48654836, 0.34930497, 1)
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uyhp3"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qoj3g"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ic30a"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [node name="CauldronWindow" type="Control" unique_id=260319833]
 layout_mode = 3
@@ -155,6 +168,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(730, 25)
 color = Color(0, 0, 0, 0.7647059)
 
 [node name="WindowPanel" type="Panel" parent="." unique_id=130728709]
@@ -165,9 +179,9 @@ anchor_top = 0.08
 anchor_right = 0.9
 anchor_bottom = 0.92
 offset_left = -25.0
-offset_top = 2.4000015
+offset_top = 1.4000015
 offset_right = 26.0
-offset_bottom = 2.5999756
+offset_bottom = 1.5999756
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_hhpiv")
@@ -178,9 +192,9 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -4.0
+offset_left = -13.599976
 offset_top = 11.0
-offset_right = 35.0
+offset_right = 25.400024
 offset_bottom = 53.0
 grow_horizontal = 0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -230,10 +244,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 25.0
-offset_top = 130.0
-offset_right = 2.0
-offset_bottom = -6.0
+offset_left = 94.0
+offset_top = 26.0
+offset_right = -54.0
+offset_bottom = -85.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 4
@@ -271,6 +285,7 @@ placeholder_text = "Search…"
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("theme_sb")
+theme_override_constants/scrollbar_h_separation = 10
 
 [node name="MaterialList" type="VBoxContainer" parent="WindowPanel/HBox/LeftPanel/VBox/Scroll" unique_id=1039033686]
 unique_name_in_owner = true
@@ -283,23 +298,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.7
 
-[node name="ZoneLabel" type="Label" parent="WindowPanel/HBox/RightPanel" unique_id=1372306112]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_left = 33.0
-offset_top = 6.0
-offset_right = -22.0
-offset_bottom = 26.0
-grow_horizontal = 2
-theme_override_colors/font_color = Color(0.3019608, 0.16862746, 0.03137255, 0.34901962)
-theme_override_fonts/font = ExtResource("3_vbrxh")
-theme_override_font_sizes/font_size = 9
-text = "Drag materials here — overlap two to combine"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="Sprite2D9" type="Sprite2D" parent="WindowPanel/HBox/RightPanel" unique_id=1645604339]
+visible = false
 modulate = Color(1, 1, 1, 0.25882354)
 position = Vector2(282.36, 236.85)
 texture = ExtResource("6_tqf8v")
@@ -313,7 +313,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 33.0
 offset_top = 30.0
-offset_right = -22.0
+offset_right = -29.0
 offset_bottom = -33.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -323,15 +323,16 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 4.0
 offset_bottom = 36.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0, 0, 0, 0.70000005)
+color = Color(0.5647059, 0.4745098, 0.3647059, 1)
 
 [node name="CauldronSprite" type="Sprite2D" parent="WindowPanel/HBox/RightPanel/CraftZone" unique_id=1841148264]
 unique_name_in_owner = true
-position = Vector2(249.05261, 469)
+position = Vector2(244, 469)
 scale = Vector2(0.8368421, 0.8368421)
 texture = ExtResource("5_hhpiv")
 
@@ -342,9 +343,9 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -482.0
+offset_top = -445.04
 offset_right = -22.0
-offset_bottom = -466.0
+offset_bottom = -429.04
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_color = Color(1, 1, 1, 0.45)
@@ -402,7 +403,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 33.0
 offset_top = -33.0
-offset_right = -22.0
+offset_right = -29.0
 offset_bottom = -6.0
 grow_horizontal = 2
 grow_vertical = 0
@@ -410,6 +411,7 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("3_vbrxh")
 theme_override_font_sizes/font_size = 11
 theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ulfgo")
 theme_override_styles/hover = SubResource("StyleBoxFlat_tqf8v")
 text = "Clear Table"
 
@@ -420,9 +422,9 @@ layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_left = 33.0
-offset_top = 215.0
-offset_right = -22.0
-offset_bottom = 251.0
+offset_top = 240.0
+offset_right = -29.0
+offset_bottom = 276.0
 grow_horizontal = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_hint")
 
@@ -444,59 +446,36 @@ theme_override_font_sizes/font_size = 9
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Sprite2D9" type="Sprite2D" parent="." unique_id=2125630485]
-position = Vector2(477, 662)
-texture = ExtResource("8_japh0")
-
-[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=877072206]
-position = Vector2(367.84, 142)
-texture = ExtResource("6_tqf8v")
-
-[node name="Sprite2D3" type="Sprite2D" parent="." unique_id=488732117]
-position = Vector2(242, 94.66)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("6_tqf8v")
-
-[node name="Sprite2D4" type="Sprite2D" parent="." unique_id=2006084496]
-position = Vector2(489.95, 94.66)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("6_tqf8v")
-
-[node name="Sprite2D5" type="Sprite2D" parent="." unique_id=1959467465]
-position = Vector2(489.95, 191)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("6_tqf8v")
-
-[node name="Sprite2D7" type="Sprite2D" parent="." unique_id=140037413]
-position = Vector2(566.615, 140.725)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("6_tqf8v")
-
-[node name="Sprite2D8" type="Sprite2D" parent="." unique_id=852299633]
-position = Vector2(165.505, 140.725)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("6_tqf8v")
-
-[node name="Sprite2D6" type="Sprite2D" parent="." unique_id=24679733]
-position = Vector2(242, 191)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("6_tqf8v")
+[node name="ZoneLabel" type="Label" parent="." unique_id=1372306112]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 658.0
+offset_top = 157.0
+offset_right = -131.0
+offset_bottom = 176.99998
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.89411765, 0.84313726, 0.6627451, 1)
+theme_override_fonts/font = ExtResource("3_vbrxh")
+theme_override_font_sizes/font_size = 9
+text = "Drag materials here — overlap two to combine"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1560368218]
-position = Vector2(640.00006, 113)
-scale = Vector2(1.1488888, 1.148889)
+position = Vector2(635, 391)
 texture = ExtResource("7_hv7bl")
 
 [node name="TitleBar2" type="Label" parent="." unique_id=2113757120]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_left = 10.0
-offset_top = 23.0
-offset_right = -539.0
-offset_bottom = 53.0
+offset_left = 9.0
+offset_top = 66.0
+offset_right = -540.0
+offset_bottom = 96.0
 grow_horizontal = 2
-theme_override_colors/font_color = Color(0.8627451, 0.76862746, 0.6313726, 1)
+theme_override_colors/font_color = Color(0.89411765, 0.84313726, 0.6627451, 1)
 theme_override_fonts/font = ExtResource("2_cq7gh")
 theme_override_font_sizes/font_size = 17
 text = "Materials"
@@ -509,13 +488,13 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = 223.0
-offset_top = 71.0
-offset_right = 299.0
-offset_bottom = 92.0
+offset_left = 182.0
+offset_top = 70.505
+offset_right = 258.0
+offset_bottom = 89.99999
 grow_horizontal = 0
-theme_override_colors/font_color = Color(0.8627451, 0.76862746, 0.6313726, 1)
-theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(0.67058825, 0.49803922, 0.35686275, 1)
+theme_override_colors/font_hover_color = Color(0.8117647, 0.7176471, 0.54509807, 1)
 theme_override_fonts/font = ExtResource("3_vbrxh")
 theme_override_font_sizes/font_size = 9
 theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
@@ -528,10 +507,10 @@ text = "??? Hint"
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_left = 658.0
-offset_top = 52.0
-offset_right = 78.0
-offset_bottom = 82.0
+offset_left = 625.0
+offset_top = 99.0
+offset_right = 45.0
+offset_bottom = 129.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(0.3019608, 0.16862746, 0.03137255, 1)
 theme_override_fonts/font = ExtResource("2_cq7gh")
@@ -540,7 +519,26 @@ text = "Alchemy Lab"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Button" type="Button" parent="." unique_id=741676407]
+layout_mode = 0
+offset_left = 294.0
+offset_top = 603.0
+offset_right = 404.0
+offset_bottom = 629.0
+theme_override_colors/font_color = Color(0.89411765, 0.84313726, 0.6627451, 1)
+theme_override_colors/font_focus_color = Color(0.8117647, 0.7176471, 0.54509807, 1)
+theme_override_colors/font_pressed_color = Color(0.89411765, 0.84313726, 0.6627451, 1)
+theme_override_colors/font_hover_color = Color(0.8117647, 0.7176471, 0.54509807, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.89411765, 0.84313726, 0.6627451, 1)
+theme_override_fonts/font = ExtResource("2_cq7gh")
+theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("StyleBoxFlat_uyhp3")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_qoj3g")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ic30a")
+text = "  ◄ BACK"
+
 [connection signal="pressed" from="WindowPanel/BestiaryButton" to="." method="_on_bestiary_btn_pressed"]
 [connection signal="pressed" from="WindowPanel/CloseButton2" to="." method="_on_close_button_pressed"]
 [connection signal="pressed" from="WindowPanel/HBox/RightPanel/ClearButton" to="." method="_on_clear_button_pressed"]
 [connection signal="pressed" from="TitleBar2/HintButton" to="." method="_on_hint_btn_pressed"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

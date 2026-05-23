@@ -51,10 +51,13 @@ func _gui_input(event: InputEvent) -> void:
 			is_dragging = true
 			_drag_offset = get_local_mouse_position()
 			move_to_front()
+			CursorManager.set_drag(true)
+			SFXManager.suppress_next_click()
 			get_viewport().set_input_as_handled()
 		else:
 			is_dragging = false
 			emit_signal("drag_ended", self)
+			CursorManager.set_drag(false)
 			get_viewport().set_input_as_handled()
 	elif event is InputEventMouseMotion and is_dragging:
 		position += event.relative

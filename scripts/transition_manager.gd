@@ -26,7 +26,7 @@ func _build_layer() -> void:
 
 	_pix_mat = ShaderMaterial.new()
 	_pix_mat.shader = _PIX_SHADER
-	_pix_mat.set_shader_parameter("pixel_size", 1.0)
+	_pix_mat.set_shader_parameter("pixel_size", 0.5)
 
 	_pix_rect = ColorRect.new()
 	_pix_rect.name = "PixelateRect"
@@ -98,17 +98,17 @@ func _finish() -> void:
 # ── Public API ────────────────────────────────────────────────────────────────
 
 ## Pixelates the screen out, swaps to scene_path, then de-pixelates in.
-func pixelate_to(scene_path: String, duration: float = 0.6) -> void:
+func pixelate_to(scene_path: String, duration: float = 1.6) -> void:
 	if _busy:
 		return
 	_busy = true
 	_fit_to_viewport()
 
-	_pix_mat.set_shader_parameter("pixel_size", 1.0)
+	_pix_mat.set_shader_parameter("pixel_size", 1)
 	_pix_rect.visible = true
 
 	var t := create_tween()
-	t.tween_method(_set_pixel_size, 1.0, 32.0, duration * 0.5)
+	t.tween_method(_set_pixel_size, 1.0, 28.0, duration * 1)
 	await t.finished
 
 	get_tree().change_scene_to_file(scene_path)
@@ -116,7 +116,7 @@ func pixelate_to(scene_path: String, duration: float = 0.6) -> void:
 	await get_tree().process_frame
 
 	var t2 := create_tween()
-	t2.tween_method(_set_pixel_size, 32.0, 1.0, duration * 0.5)
+	t2.tween_method(_set_pixel_size, 28.0, 1.0, duration * 1)
 	await t2.finished
 
 	_pix_rect.visible = false

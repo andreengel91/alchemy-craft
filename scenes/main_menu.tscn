@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cg4qhrf13j4ve" path="res://scripts/main_menu.gd" id="1_menu01"]
 [ext_resource type="Texture2D" uid="uid://d4coyy0i5xi0d" path="res://assets/sprites/BG.jpg" id="2_8ln24"]
 [ext_resource type="FontFile" uid="uid://cg25qrbv8wds0" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="2_bqqt6"]
+[ext_resource type="Texture2D" uid="uid://c6rb4h4mycl5l" path="res://assets/ui/Overlay_Main.png" id="3_5dd4i"]
 [ext_resource type="FontFile" uid="uid://bopv5stolxb5o" path="res://assets/fonts/PixelOperator8.ttf" id="3_wu84c"]
 [ext_resource type="Texture2D" uid="uid://cv3415kdoakeu" path="res://assets/sprites/wizard.png" id="4_wu84c"]
 [ext_resource type="Texture2D" uid="uid://dphkjjah2o7vu" path="res://assets/ui/btn_exit_normal.png" id="5_rtw2f"]
@@ -32,37 +33,34 @@ color = Color(0, 0, 0, 1)
 position = Vector2(1175, 360)
 texture = ExtResource("2_8ln24")
 
-[node name="Center" type="CenterContainer" parent="." unique_id=207291539]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -300.95502
-offset_top = -160.0
-offset_right = -300.95502
-offset_bottom = -160.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="VBox" type="VBoxContainer" parent="Center" unique_id=1290336106]
-layout_mode = 2
-theme_override_constants/separation = 24
-
-[node name="Title" type="Label" parent="Center/VBox" unique_id=848097805]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 0.8)
-theme_override_fonts/font = ExtResource("2_bqqt6")
-theme_override_font_sizes/font_size = 48
-text = "Alchemy
-Lab"
-horizontal_alignment = 1
-
-[node name="Subtitle" type="Label" parent="Center/VBox" unique_id=366215772]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.19215687, 0.46666667, 1, 1)
+[node name="Subtitle" type="Label" parent="." unique_id=366215772]
+layout_mode = 0
+offset_left = 195.0
+offset_top = 379.0
+offset_right = 489.0
+offset_bottom = 414.0
+theme_override_colors/font_color = Color(0.89411765, 0.84313726, 0.6627451, 1)
 theme_override_fonts/font = ExtResource("3_wu84c")
 theme_override_font_sizes/font_size = 16
-text = "Combine elements. Discover their secrets."
+text = "Combine elements.
+Discover their secrets."
+horizontal_alignment = 1
+
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=282238482]
+visible = false
+position = Vector2(640, 350)
+texture = ExtResource("3_5dd4i")
+
+[node name="Title" type="Label" parent="." unique_id=848097805]
+layout_mode = 0
+offset_left = 127.0
+offset_top = 203.0
+offset_right = 491.0
+offset_bottom = 227.0
+theme_override_colors/font_color = Color(0.89411765, 0.84313726, 0.6627451, 1)
+theme_override_fonts/font = ExtResource("2_bqqt6")
+theme_override_font_sizes/font_size = 24
+text = "Alchemy Lab"
 horizontal_alignment = 1
 
 [node name="Wizard" type="Sprite2D" parent="." unique_id=1226982727]
@@ -71,21 +69,21 @@ texture = ExtResource("4_wu84c")
 
 [node name="ExitButton" type="TextureButton" parent="." unique_id=416203377]
 layout_mode = 0
-offset_left = 291.0
-offset_top = 641.0
-offset_right = 402.0
-offset_bottom = 688.0
+offset_left = 280.0
+offset_top = 547.0
+offset_right = 391.0
+offset_bottom = 594.0
 texture_normal = ExtResource("5_rtw2f")
 texture_pressed = ExtResource("5_rtw2f")
 texture_hover = ExtResource("7_tbmy8")
 
 [node name="StartButton" type="TextureButton" parent="." unique_id=667858678]
 layout_mode = 0
-offset_left = 142.0
-offset_top = 406.0
-offset_right = 334.0
-offset_bottom = 453.0
-scale = Vector2(2, 2)
+offset_left = 111.0
+offset_top = 446.0
+offset_right = 411.0
+offset_bottom = 493.0
+scale = Vector2(1.5, 1.5)
 texture_normal = ExtResource("7_oa1go")
 texture_pressed = ExtResource("7_oa1go")
 texture_hover = ExtResource("9_jk1qb")

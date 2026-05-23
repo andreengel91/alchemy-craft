@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://ed1uma07l3tg"]
 
 [ext_resource type="Script" uid="uid://d2watjqje4pp4" path="res://scripts/pause_menu.gd" id="1_pm01"]
-[ext_resource type="Texture2D" uid="uid://p52rv7gpa4ih" path="res://assets/ui/pause-menu/btn_pause_menu.png" id="2_knqa7"]
+[ext_resource type="Texture2D" uid="uid://fnt6jlun3rru" path="res://assets/ui/pause-bg.png" id="2_1rgno"]
 [ext_resource type="FontFile" uid="uid://cg25qrbv8wds0" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="2_myx47"]
+[ext_resource type="Texture2D" uid="uid://ep1uv7jvys2i" path="res://assets/ui/Overlay_Pause.png" id="3_1rgno"]
 [ext_resource type="Texture2D" uid="uid://c20it0mvccli7" path="res://assets/ui/btn_resume_normal.png" id="4_rn"]
 [ext_resource type="Texture2D" uid="uid://c4bb15jc3x1n6" path="res://assets/ui/btn_resume_hover.png" id="5_rh"]
 [ext_resource type="Texture2D" uid="uid://ci66dgbsyyf5b" path="res://assets/ui/btn_achievements_normal.png" id="6_an"]
@@ -12,6 +13,15 @@
 [ext_resource type="Texture2D" uid="uid://uhmxle0dxakt" path="res://assets/ui/btn_quit_normal.png" id="10_71k7c"]
 [ext_resource type="Texture2D" uid="uid://cvous1c1cerm" path="res://assets/ui/btn_quit_hover.png" id="11_cmnsq"]
 [ext_resource type="FontFile" uid="uid://bopv5stolxb5o" path="res://assets/fonts/PixelOperator8.ttf" id="12_ofnjo"]
+[ext_resource type="Texture2D" uid="uid://u2g6sdhlnlun" path="res://assets/ui/checkmark.png" id="14_3o3g3"]
+[ext_resource type="Texture2D" uid="uid://ydvfn2hqk815" path="res://assets/ui/unchecked.png" id="15_h5b1d"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3o3g3"]
+texture = ExtResource("2_1rgno")
+expand_margin_left = 45.0
+expand_margin_top = 25.0
+expand_margin_right = 45.0
+expand_margin_bottom = 25.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
 bg_color = Color(0.08, 0.06, 0.13, 0.98)
@@ -77,44 +87,96 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.7647059)
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1450898947]
-position = Vector2(641.045, 356.405)
-scale = Vector2(1.2, 1.2)
-texture = ExtResource("2_knqa7")
+[node name="BookRoot" type="Panel" parent="." unique_id=52634791]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.08
+anchor_top = 0.08
+anchor_right = 0.92
+anchor_bottom = 0.92
+offset_left = 3.600006
+offset_top = -6.5999985
+offset_right = 3.4000244
+offset_bottom = -6.4000244
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_3o3g3")
 
-[node name="Title2" type="Label" parent="." unique_id=378874352]
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=1318521738]
+position = Vector2(638, 377)
+texture = ExtResource("3_1rgno")
+
+[node name="ResumeButton" type="TextureButton" parent="." unique_id=705736004]
 layout_mode = 0
-offset_left = 538.0
-offset_top = 39.300003
-offset_right = 742.0
-offset_bottom = 112.3
-theme_override_colors/font_color = Color(0, 0, 0, 0.8)
+offset_left = 229.0
+offset_top = 168.0
+offset_right = 529.0
+offset_bottom = 215.0
+texture_normal = ExtResource("4_rn")
+texture_pressed = ExtResource("5_rh")
+texture_hover = ExtResource("5_rh")
+texture_focused = ExtResource("4_rn")
+
+[node name="AchievementsButton" type="TextureButton" parent="." unique_id=316578529]
+layout_mode = 0
+offset_left = 229.0
+offset_top = 225.0
+offset_right = 529.0
+offset_bottom = 272.0
+texture_normal = ExtResource("6_an")
+texture_pressed = ExtResource("7_ah")
+texture_hover = ExtResource("7_ah")
+texture_focused = ExtResource("6_an")
+stretch_mode = 5
+
+[node name="ResetButton" type="TextureButton" parent="." unique_id=1987809227]
+layout_mode = 0
+offset_left = 229.0
+offset_top = 339.0
+offset_right = 529.0
+offset_bottom = 386.0
+scale = Vector2(0.6, 0.6)
+texture_normal = ExtResource("8_rsn")
+texture_pressed = ExtResource("9_rsh")
+texture_hover = ExtResource("9_rsh")
+texture_focused = ExtResource("8_rsn")
+
+[node name="QuitButton" type="TextureButton" parent="." unique_id=97925715]
+layout_mode = 0
+offset_left = 229.0
+offset_top = 282.0
+offset_right = 529.0
+offset_bottom = 329.0
+texture_normal = ExtResource("10_71k7c")
+texture_pressed = ExtResource("10_71k7c")
+texture_hover = ExtResource("11_cmnsq")
+
+[node name="TitleBar2" type="Label" parent="." unique_id=1209398534]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 336.0
+offset_top = 45.0
+offset_right = -842.0
+offset_bottom = 84.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.89411765, 0.84313726, 0.6627451, 1)
 theme_override_fonts/font = ExtResource("2_myx47")
-theme_override_font_sizes/font_size = 34
+theme_override_font_sizes/font_size = 17
 text = "Game
 Paused"
 horizontal_alignment = 1
-
-[node name="Title" type="Label" parent="." unique_id=561879607]
-layout_mode = 0
-offset_left = 538.0
-offset_top = 34.0
-offset_right = 742.0
-offset_bottom = 107.00009
-theme_override_colors/font_color = Color(1, 1, 1, 0.8)
-theme_override_fonts/font = ExtResource("2_myx47")
-theme_override_font_sizes/font_size = 34
-text = "Game
-Paused"
-horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Center" type="CenterContainer" parent="." unique_id=1665460909]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 350.0
-offset_bottom = 44.0
+offset_left = 222.0
+offset_top = 454.055
+offset_right = -717.9999
+offset_bottom = 0.05480957
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -128,8 +190,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -174.0
-offset_bottom = 154.0
+offset_top = -203.055
+offset_bottom = 140.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 31
@@ -163,7 +225,7 @@ horizontal_alignment = 1
 
 [node name="MusicRow" type="HBoxContainer" parent="Center/Panel/Margin/VBox" unique_id=1213725583]
 layout_mode = 2
-theme_override_constants/separation = 8
+theme_override_constants/separation = 4
 
 [node name="MusicLabel" type="Label" parent="Center/Panel/Margin/VBox/MusicRow" unique_id=580188619]
 custom_minimum_size = Vector2(52, 0)
@@ -197,11 +259,13 @@ theme_override_colors/font_hover_pressed_color = Color(0.72156864, 0.54901963, 0
 theme_override_fonts/font = ExtResource("12_ofnjo")
 theme_override_font_sizes/font_size = 10
 theme_override_colors/checkbox_checked_color = Color(0.6117647, 0.43529412, 0.29411766, 1)
+theme_override_icons/checked = ExtResource("14_3o3g3")
+theme_override_icons/unchecked = ExtResource("15_h5b1d")
 text = "Mute"
 
 [node name="SFXRow" type="HBoxContainer" parent="Center/Panel/Margin/VBox" unique_id=1509782580]
 layout_mode = 2
-theme_override_constants/separation = 8
+theme_override_constants/separation = 4
 
 [node name="SFXLabel" type="Label" parent="Center/Panel/Margin/VBox/SFXRow" unique_id=625540051]
 custom_minimum_size = Vector2(52, 0)
@@ -235,57 +299,56 @@ theme_override_colors/font_hover_pressed_color = Color(0.72156864, 0.54901963, 0
 theme_override_fonts/font = ExtResource("12_ofnjo")
 theme_override_font_sizes/font_size = 10
 theme_override_colors/checkbox_checked_color = Color(0.6117647, 0.43529412, 0.29411766, 1)
+theme_override_icons/checked = ExtResource("14_3o3g3")
+theme_override_icons/unchecked = ExtResource("15_h5b1d")
 text = "Mute"
 
-[node name="ResumeButton" type="TextureButton" parent="." unique_id=705736004]
+[node name="RightTitle" type="Label" parent="." unique_id=903027074]
 layout_mode = 0
-offset_left = 583.0
-offset_top = 198.0
-offset_right = 694.0
-offset_bottom = 245.0
-texture_normal = ExtResource("4_rn")
-texture_pressed = ExtResource("5_rh")
-texture_hover = ExtResource("5_rh")
-texture_focused = ExtResource("4_rn")
+offset_left = 730.0
+offset_top = 92.0
+offset_right = 1230.0005
+offset_bottom = 105.0
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.3, 0.17, 0.03, 1)
+theme_override_fonts/font = ExtResource("2_myx47")
+theme_override_font_sizes/font_size = 12
+text = "THE LORE"
+horizontal_alignment = 1
 
-[node name="AchievementsButton" type="TextureButton" parent="." unique_id=316578529]
+[node name="Label" type="Label" parent="." unique_id=805302092]
 layout_mode = 0
-offset_left = 550.0
-offset_top = 255.0
-offset_right = 727.0
-offset_bottom = 302.0
-texture_normal = ExtResource("6_an")
-texture_pressed = ExtResource("7_ah")
-texture_hover = ExtResource("7_ah")
-texture_focused = ExtResource("6_an")
-stretch_mode = 5
+offset_left = 701.0
+offset_top = 204.0
+offset_right = 1103.0
+offset_bottom = 562.0
+theme_override_colors/font_color = Color(0.8117647, 0.7176471, 0.54509807, 1)
+text = "Deep beneath the fortress,
+where no light finds the stairs,
+stands a cauldron as old as the
+stone itself. They say those who
+unite the right elements shape
+not just matter — but truth. 
 
-[node name="ResetButton" type="TextureButton" parent="." unique_id=1987809227]
-layout_mode = 0
-offset_left = 538.745
-offset_top = 312.0
-offset_right = 735.7452
-offset_bottom = 359.0
-texture_normal = ExtResource("8_rsn")
-texture_pressed = ExtResource("9_rsh")
-texture_hover = ExtResource("9_rsh")
-texture_focused = ExtResource("8_rsn")
+Fire.
+Water.
+Earth. 
+Shadow. 
+Light. 
 
-[node name="QuitButton" type="TextureButton" parent="." unique_id=97925715]
-layout_mode = 0
-offset_left = 560.375
-offset_top = 369.0
-offset_right = 716.37506
-offset_bottom = 416.0
-texture_normal = ExtResource("10_71k7c")
-texture_pressed = ExtResource("10_71k7c")
-texture_hover = ExtResource("11_cmnsq")
+Five roots.
 
-[connection signal="value_changed" from="Center/Panel/Margin/VBox/MusicRow/MusicSlider" to="." method="_on_music_slider_changed"]
-[connection signal="toggled" from="Center/Panel/Margin/VBox/MusicRow/MusicMute" to="." method="_on_music_mute_toggled"]
-[connection signal="value_changed" from="Center/Panel/Margin/VBox/SFXRow/SFXSlider" to="." method="_on_sfx_slider_changed"]
-[connection signal="toggled" from="Center/Panel/Margin/VBox/SFXRow/SFXMute" to="." method="_on_sfx_mute_toggled"]
+Endless paths.
+
+
+The cauldron waits."
+horizontal_alignment = 1
+
 [connection signal="pressed" from="ResumeButton" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="AchievementsButton" to="." method="_on_achievements_pressed"]
 [connection signal="pressed" from="ResetButton" to="." method="_on_reset_pressed"]
 [connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="value_changed" from="Center/Panel/Margin/VBox/MusicRow/MusicSlider" to="." method="_on_music_slider_changed"]
+[connection signal="toggled" from="Center/Panel/Margin/VBox/MusicRow/MusicMute" to="." method="_on_music_mute_toggled"]
+[connection signal="value_changed" from="Center/Panel/Margin/VBox/SFXRow/SFXSlider" to="." method="_on_sfx_slider_changed"]
+[connection signal="toggled" from="Center/Panel/Margin/VBox/SFXRow/SFXMute" to="." method="_on_sfx_mute_toggled"]

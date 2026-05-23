@@ -124,6 +124,7 @@ func _try_unlock(id: String, condition: bool) -> void:
 		return
 	unlocked.append(id)
 	_save()
+	SFXManager.play_achievement()
 	var a: Dictionary = ACHIEVEMENTS[id]
 	achievement_unlocked.emit(id, a["title"], a["desc"])
 	var popup: Node = _POPUP_SCENE.instantiate()

@@ -65,6 +65,7 @@ func _ready() -> void:
 	_hint_container.visible = false
 	_cauldron_quip.visible = false
 	_cauldron_click_area.gui_input.connect(_on_cauldron_gui_input)
+	CursorManager.register_interactive(_cauldron_click_area)
 	_material_search.text_changed.connect(_on_search_changed)
 	_refresh_list()
 	_update_recipe_counter()
@@ -169,7 +170,46 @@ func _make_item(id: String) -> Control:
 
 	root.setup(id, _pretty(id))
 	root.drag_ended.connect(_on_item_drag_ended)
+	CursorManager.register_interactive(root)
 	return root
+
+func _play_reveal_animation(item: Control) -> void:
+	item.modulate.a = 0.0
+
+	# Smoke burst parented to the item so it moves with it and auto-frees with it.
+	var smoke := CPUParticles2D.new()
+	smoke.position      = Vector2(32.0, 64.0)  # swatch centre in item local space
+	smoke.z_index       = 1
+	smoke.amount        = 150
+	smoke.lifetime      = 1.5
+	smoke.one_shot      = true
+	smoke.explosiveness = 1.0  # emit most particles in the first burst frame
+	smoke.preprocess    = 0.0
+
+	smoke.direction              = Vector2(0.0, -20.0)
+	smoke.spread                 = 50.0
+	smoke.gravity                = Vector2(0.0, 0.0)
+	smoke.initial_velocity_min   = 12.0
+	smoke.initial_velocity_max   = 50.0
+	smoke.scale_amount_min       = 3.0
+	smoke.scale_amount_max       = 12.0
+
+	# Gray → fully transparent over each particle's lifetime.
+	var grad := Gradient.new()
+	grad.set_color(0, Color(0.66, 0.66, 0.66, 0.72))
+	grad.set_color(1, Color(0.66, 0.66, 0.66, 0.00))
+	smoke.color_ramp = grad
+
+	item.add_child(smoke)
+	smoke.emitting = true
+	smoke.finished.connect(smoke.queue_free)
+
+	# Reveal: wait for smoke to establish (0.1 s), then fade in over 0.85 s.
+	# Total: ~1.2 s. Tween is owned by the item, cancels automatically if freed.
+	var tw := item.create_tween()
+	tw.tween_interval(0.1)
+	tw.tween_property(item, "modulate:a", 1.0, 0.85) \
+	  .set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
 
 func _on_item_drag_ended(item: Control) -> void:
 	_check_overlaps(item)
@@ -197,6 +237,8 @@ func _try_combine(a: Control, b: Control) -> void:
 	var new_item := _make_item(result["result"])
 	new_item.position = mid_pos
 	_craft_zone.add_child(new_item)
+	_play_reveal_animation(new_item)
+	SFXManager.play_craft_success()
 
 	var is_new := GameState.add_material(result["result"])
 	GameState.add_discovered_recipe(result["result"])
@@ -222,6 +264,7 @@ func _on_bestiary_btn_pressed() -> void:
 		add_child(_bestiary_panel)
 	_bestiary_panel.refresh()
 	_bestiary_panel.visible = true
+	SFXManager.play_page_turn()
 
 # ── Hint system ───────────────────────────────────────────────────────────────
 
@@ -340,3 +383,7 @@ func _on_clear_button_pressed() -> void:
 	for child in _craft_zone.get_children():
 		if child.get("material_id") != null:
 			child.queue_free()
+
+
+func _on_button_pressed() -> void:
+	emit_signal("closed")

@@ -4,8 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://crtln274qqq4v" path="res://assets/ui/Overlay_Achievements.png" id="2_1tqw5"]
 [ext_resource type="Texture2D" uid="uid://cr7akhvupbdoh" path="res://assets/ui/achievements_bg.png" id="2_567au"]
 [ext_resource type="FontFile" uid="uid://cg25qrbv8wds0" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="2_bold"]
-[ext_resource type="Texture2D" uid="uid://b17uto5ricr0p" path="res://assets/ui/stange-lang.png" id="4_jf0o8"]
-[ext_resource type="Texture2D" uid="uid://ba0uegi8tr2qq" path="res://assets/ui/lower-stange.png" id="6_vrnbx"]
 [ext_resource type="Theme" uid="uid://dh8lwvkk7agww" path="res://assets/ui/scrollbar_theme.tres" id="theme_sb"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_37hpc"]
@@ -48,6 +46,15 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vrnbx"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jf0o8"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bqe1t"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
 [node name="AchievementOverview" type="Control" unique_id=2031309675]
 layout_mode = 3
 anchors_preset = 15
@@ -83,13 +90,14 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 12.0
-offset_top = 44.0
-offset_right = -12.0
-offset_bottom = -12.0
+offset_left = 75.0
+offset_top = 82.0
+offset_right = -14.0
+offset_bottom = -101.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("theme_sb")
+theme_override_constants/scrollbar_h_separation = 8
 
 [node name="AchievList" type="VBoxContainer" parent="PanelRoot/Scroll" unique_id=472875963]
 unique_name_in_owner = true
@@ -97,14 +105,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 8
 
-[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=1684981749]
-position = Vector2(255, 379)
-rotation = 1.5707964
-scale = Vector2(1.275486, 1)
-texture = ExtResource("4_jf0o8")
-
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=837576383]
-position = Vector2(637, 150)
+position = Vector2(635, 351)
 scale = Vector2(0.95, 0.95)
 texture = ExtResource("2_1tqw5")
 
@@ -112,10 +114,10 @@ texture = ExtResource("2_1tqw5")
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_left = 843.205
-offset_top = 102.385
-offset_right = -236.79468
-offset_bottom = 121.385
+offset_left = 841.205
+offset_top = 149.38501
+offset_right = -238.79468
+offset_bottom = 168.38501
 grow_horizontal = 2
 theme_override_constants/separation = 4
 
@@ -140,10 +142,6 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_bar_fill")
 max_value = 1.0
 show_percentage = false
 
-[node name="Sprite2D9" type="Sprite2D" parent="CounterBox" unique_id=366189822]
-position = Vector2(-356.20502, 545.615)
-texture = ExtResource("6_vrnbx")
-
 [node name="CloseButton" type="Button" parent="." unique_id=46093073]
 layout_mode = 1
 anchors_preset = 1
@@ -165,16 +163,35 @@ text = "✕"
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_left = -203.0
-offset_top = 64.4375
-offset_right = -230.0
-offset_bottom = 94.4375
+offset_left = -205.0
+offset_top = 114.0
+offset_right = -232.0
+offset_bottom = 144.0
 grow_horizontal = 2
-theme_override_colors/font_color = Color(0.8627451, 0.76862746, 0.6313726, 1)
+theme_override_colors/font_color = Color(0.89411765, 0.84313726, 0.6627451, 1)
 theme_override_fonts/font = ExtResource("2_bold")
 theme_override_font_sizes/font_size = 17
 text = "Achievements"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Button" type="Button" parent="." unique_id=1444101031]
+layout_mode = 0
+offset_left = 427.0
+offset_top = 560.0
+offset_right = 537.0
+offset_bottom = 586.0
+theme_override_colors/font_color = Color(0.89411765, 0.84313726, 0.6627451, 1)
+theme_override_colors/font_focus_color = Color(0.8117647, 0.7176471, 0.54509807, 1)
+theme_override_colors/font_pressed_color = Color(0.89411765, 0.84313726, 0.6627451, 1)
+theme_override_colors/font_hover_color = Color(0.8117647, 0.7176471, 0.54509807, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.89411765, 0.84313726, 0.6627451, 1)
+theme_override_fonts/font = ExtResource("2_bold")
+theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("StyleBoxFlat_vrnbx")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_jf0o8")
+theme_override_styles/hover = SubResource("StyleBoxFlat_bqe1t")
+text = "  ◄ BACK"
+
 [connection signal="pressed" from="CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

@@ -21,7 +21,9 @@ GameState="*res://autoloads/game_state.gd"
 TransitionManager="*res://scripts/transition_manager.gd"
 AchievementManager="*res://scripts/achievement_manager.gd"
 AudioManager="*res://autoloads/audio_manager.gd"
+SFXManager="*res://scripts/sfx_manager.gd"
 MusicManager="*uid://sdy3ckx01gwu"
+CursorManager="*res://autoloads/cursor_manager.gd"
 
 [display]
 

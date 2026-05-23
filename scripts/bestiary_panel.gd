@@ -1,5 +1,7 @@
 extends Control
 
+signal closed
+
 const MATERIAL_ITEM_SCRIPT := preload("res://scripts/material_item.gd")
 const RECIPE_PATH := "res://data/recipes.json"
 
@@ -97,11 +99,11 @@ func _make_card(mat_id: String, discovered: bool) -> Control:
 	var display_name: String = _name_lookup.get(mat_id, mat_id.replace("_", " ").capitalize())
 
 	var card := Panel.new()
-	card.custom_minimum_size = Vector2(88, 88)
+	card.custom_minimum_size = Vector2(80, 80)
 
 	# Parchment-toned card background
 	var sbox := StyleBoxFlat.new()
-	sbox.bg_color     = Color(0.91, 0.83, 0.66) if discovered else Color(0.80, 0.71, 0.54)
+	sbox.bg_color     = Color(0.81, 0.72, 0.55) if discovered else Color(0.80, 0.71, 0.54)
 	sbox.border_color = Color(0.62, 0.44, 0.22) if discovered else Color(0.52, 0.38, 0.20, 0.7)
 	sbox.border_width_left   = 0
 	sbox.border_width_top    = 0
@@ -116,7 +118,7 @@ func _make_card(mat_id: String, discovered: bool) -> Control:
 	var vbox := VBoxContainer.new()
 	vbox.add_theme_constant_override("separation", 3)
 	card.add_child(vbox)
-	vbox.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT, Control.PRESET_MODE_MINSIZE, 5)
+	vbox.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT, Control.PRESET_MODE_MINSIZE, 4)
 
 	# Swatch container — holds material icon + optional completion checkmark
 	var swatch_wrap := Control.new()
@@ -172,8 +174,14 @@ func _make_card(mat_id: String, discovered: bool) -> Control:
 
 	# Full-card completion overlay — dark layer over icon + label, checkmark centered on top
 	if discovered and (total == 0 or found >= total):
-		var dark := ColorRect.new()
-		dark.color = Color(0, 0, 0, 0.0)
+		var dark := Panel.new()
+		var dark_style := StyleBoxFlat.new()
+		dark_style.bg_color = Color(0.56, 0.47, 0.36, 0.5)
+		dark_style.corner_radius_top_left = 5
+		dark_style.corner_radius_top_right = 5
+		dark_style.corner_radius_bottom_left = 5
+		dark_style.corner_radius_top_right = 5
+		dark.add_theme_stylebox_override("panel", dark_style)
 		dark.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		dark.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 		card.add_child(dark)
@@ -181,18 +189,25 @@ func _make_card(mat_id: String, discovered: bool) -> Control:
 		if ck_tex:
 			var ck := TextureRect.new()
 			ck.texture      = ck_tex
-			ck.expand_mode  = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
-			ck.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+			ck.expand_mode  = TextureRect.EXPAND_IGNORE_SIZE
+			ck.stretch_mode = TextureRect.STRETCH_KEEP_CENTERED
 			ck.mouse_filter = Control.MOUSE_FILTER_IGNORE
-			ck.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+			ck.set_anchors_and_offsets_preset(Control.PRESET_CENTER_BOTTOM)
+			ck.offset_top -= 40
 			dark.add_child(ck)
 
 	return card
 
 # ── Signals ───────────────────────────────────────────────────────────────────
+func close() -> void:
+	visible = false
+	emit_signal("closed")
 
 func _on_close_button_pressed() -> void:
-	visible = false
+	close()
+	
+func _on_button_pressed() -> void:
+	close()
 
 # ESC closes bestiary without propagating to CauldronWindow/main_game.
 # Using _input() ensures this fires before main_game's _unhandled_input().

@@ -33,6 +33,7 @@ func _open_cauldron() -> void:
 	_window_instance = _window_scene.instantiate()
 	_window_instance.closed.connect(_close_cauldron)
 	_cauldron_window_layer.add_child(_window_instance)
+	SFXManager.play_page_turn()
 
 func _close_cauldron() -> void:
 	if _window_instance:
@@ -48,12 +49,14 @@ func _open_pause() -> void:
 	_pause_instance.quit_requested.connect(_on_quit)
 	_pause_instance.achievements_requested.connect(_open_achievements_from_pause)
 	_cauldron_window_layer.add_child(_pause_instance)
+	SFXManager.play_page_turn()
 
 func _open_achievements_from_pause() -> void:
 	# Hide (not destroy) pause menu — game stays paused, only UI changes
 	_pause_instance.visible = false
 	var overview: Control = preload("res://scenes/ui/achievement_overview.tscn").instantiate()
 	get_tree().root.add_child(overview)
+	SFXManager.play_page_turn()
 	# Re-show pause menu when achievements panel is closed
 	overview.tree_exited.connect(func() -> void:
 		if is_instance_valid(_pause_instance):

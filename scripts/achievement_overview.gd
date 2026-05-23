@@ -38,10 +38,10 @@ func _make_row(id: String) -> Control:
 	sbox.border_width_right  = 0
 	sbox.border_width_bottom = 0
 	sbox.border_color = Color(0.0, 0.0, 0.0, 0.0) if done else Color(0.0, 0.0, 0.0, 0.0)
-	sbox.corner_radius_top_left     = 8
+	sbox.corner_radius_top_left     = 0
 	sbox.corner_radius_top_right    = 0
 	sbox.corner_radius_bottom_right = 0
-	sbox.corner_radius_bottom_left  = 8
+	sbox.corner_radius_bottom_left  = 0
 	row.add_theme_stylebox_override("panel", sbox)
 
 	var hbox := HBoxContainer.new()
@@ -83,10 +83,16 @@ func _make_row(id: String) -> Control:
 
 # ── Signals ───────────────────────────────────────────────────────────────────
 
-func _on_close_button_pressed() -> void:
+func close() -> void:
 	queue_free()
+
+func _on_close_button_pressed() -> void:
+	close()
+	
+func _on_button_pressed() -> void:
+	close()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("esc"):
 		get_viewport().set_input_as_handled()
-		queue_free()
+		close()

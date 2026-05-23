@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://wsiveeg760jf" path="res://assets/ui/bestiary_bg.png" id="2_668ox"]
 [ext_resource type="FontFile" uid="uid://cg25qrbv8wds0" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="2_bold"]
 [ext_resource type="Texture2D" uid="uid://df2a4ms1yanir" path="res://assets/ui/Overlay_Bestiary.png" id="4_6hino"]
-[ext_resource type="Texture2D" uid="uid://ba0uegi8tr2qq" path="res://assets/ui/lower-stange.png" id="5_sp27r"]
+[ext_resource type="Texture2D" uid="uid://c7f6jyx7t5md0" path="res://assets/ui/book.png" id="7_y2ft0"]
 [ext_resource type="Theme" uid="uid://dh8lwvkk7agww" path="res://assets/ui/scrollbar_theme.tres" id="theme_sb"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6hino"]
@@ -28,6 +28,34 @@ corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ogcpa"]
+bg_color = Color(0.8117647, 0.7176471, 0.54509807, 1)
+border_color = Color(0, 0.1882353, 0.54901963, 1)
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+shadow_color = Color(0, 0, 0, 0.08235294)
+shadow_size = 3
+shadow_offset = Vector2(2.835, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h1v1f"]
+bg_color = Color(0.8117647, 0.7176471, 0.54509807, 1)
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_esmbn"]
+bg_color = Color(0.8117647, 0.7176471, 0.54509807, 1)
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y2ft0"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dxc84"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_paojo"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [node name="BestiaryPanel" type="Control" unique_id=1244393663]
 layout_mode = 3
@@ -56,9 +84,9 @@ anchor_top = 0.08
 anchor_right = 0.92
 anchor_bottom = 0.92
 offset_left = 0.6000061
-offset_top = 2.4000015
+offset_top = 1.4000015
 offset_right = 0.4000244
-offset_bottom = 2.5999756
+offset_bottom = 1.5999756
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_6hino")
@@ -70,22 +98,28 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 26.85
 offset_top = 14.0
-offset_right = -1.1500244
+offset_right = -24.150024
 offset_bottom = -14.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="LeftPage" type="VBoxContainer" parent="BookRoot/HBox" unique_id=1954389005]
-custom_minimum_size = Vector2(500, 0)
+[node name="Left Panel" type="Panel" parent="BookRoot/HBox" unique_id=214332011]
 layout_mode = 2
+
+[node name="LeftPage" type="VBoxContainer" parent="BookRoot/HBox/Left Panel" unique_id=1954389005]
+layout_mode = 0
+offset_left = -437.84998
+offset_top = 51.0
+offset_right = -60.849976
+offset_bottom = 498.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/separation = 6
+theme_override_constants/separation = 4
 alignment = 1
 
-[node name="LeftTitle" type="Label" parent="BookRoot/HBox/LeftPage" unique_id=1223021462]
+[node name="LeftTitle" type="Label" parent="BookRoot/HBox/Left Panel/LeftPage" unique_id=1223021462]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
@@ -96,26 +130,25 @@ theme_override_font_sizes/font_size = 12
 text = "Discovered"
 horizontal_alignment = 1
 
-[node name="LeftSep" type="ColorRect" parent="BookRoot/HBox/LeftPage" unique_id=322217619]
+[node name="LeftSep" type="ColorRect" parent="BookRoot/HBox/Left Panel/LeftPage" unique_id=322217619]
 visible = false
 custom_minimum_size = Vector2(0, 1)
 layout_mode = 2
 size_flags_horizontal = 3
 color = Color(0.5, 0.34, 0.14, 0.5)
 
-[node name="LeftScroll" type="ScrollContainer" parent="BookRoot/HBox/LeftPage" unique_id=1908735816]
+[node name="LeftScroll" type="ScrollContainer" parent="BookRoot/HBox/Left Panel/LeftPage" unique_id=1908735816]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("theme_sb")
-scroll_hint_mode = 1
 
-[node name="LeftGrid" type="GridContainer" parent="BookRoot/HBox/LeftPage/LeftScroll" unique_id=1497703119]
+[node name="LeftGrid" type="GridContainer" parent="BookRoot/HBox/Left Panel/LeftPage/LeftScroll" unique_id=1497703119]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/h_separation = 11
-theme_override_constants/v_separation = 11
-columns = 5
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 12
+columns = 4
 
 [node name="SpineShadowL" type="ColorRect" parent="BookRoot/HBox" unique_id=541771878]
 custom_minimum_size = Vector2(7, 0)
@@ -135,34 +168,39 @@ layout_mode = 2
 size_flags_vertical = 3
 color = Color(0.9607843, 0.9019608, 0.78431374, 0)
 
-[node name="RightPage" type="VBoxContainer" parent="BookRoot/HBox" unique_id=127101176]
-custom_minimum_size = Vector2(500, 0)
+[node name="RightPanel" type="Panel" parent="BookRoot/HBox" unique_id=381775633]
 layout_mode = 2
+
+[node name="RightPage" type="VBoxContainer" parent="BookRoot/HBox/RightPanel" unique_id=127101176]
+layout_mode = 0
+offset_left = 4.1500244
+offset_top = 70.0
+offset_right = 471.15002
+offset_bottom = 557.0
 size_flags_horizontal = 2
 size_flags_stretch_ratio = 2.0
 theme_override_constants/separation = 6
 alignment = 1
 
-[node name="RightSep" type="ColorRect" parent="BookRoot/HBox/RightPage" unique_id=2097614172]
+[node name="RightSep" type="ColorRect" parent="BookRoot/HBox/RightPanel/RightPage" unique_id=2097614172]
 visible = false
 custom_minimum_size = Vector2(0, 1)
 layout_mode = 2
 size_flags_horizontal = 3
 color = Color(0.5, 0.34, 0.14, 0.5)
 
-[node name="RightScroll" type="ScrollContainer" parent="BookRoot/HBox/RightPage" unique_id=2122558205]
+[node name="RightScroll" type="ScrollContainer" parent="BookRoot/HBox/RightPanel/RightPage" unique_id=2122558205]
 custom_minimum_size = Vector2(445, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("theme_sb")
-scroll_hint_mode = 1
 
-[node name="RightContent" type="VBoxContainer" parent="BookRoot/HBox/RightPage/RightScroll" unique_id=1063858479]
+[node name="RightContent" type="VBoxContainer" parent="BookRoot/HBox/RightPanel/RightPage/RightScroll" unique_id=1063858479]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="RightGrid" type="GridContainer" parent="BookRoot/HBox/RightPage/RightScroll/RightContent" unique_id=1673936212]
+[node name="RightGrid" type="GridContainer" parent="BookRoot/HBox/RightPanel/RightPage/RightScroll/RightContent" unique_id=1673936212]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -170,9 +208,9 @@ theme_override_constants/h_separation = 11
 theme_override_constants/v_separation = 11
 columns = 5
 
-[node name="EmptyLabel" type="Label" parent="BookRoot/HBox/RightPage/RightScroll/RightContent" unique_id=1024114282]
+[node name="EmptyLabel" type="Label" parent="BookRoot/HBox/RightPanel/RightPage/RightScroll/RightContent" unique_id=1024114282]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 140)
+custom_minimum_size = Vector2(0, 450)
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_colors/font_color = Color(0.45, 0.28, 0.08, 0.65)
@@ -200,25 +238,20 @@ theme_override_styles/hover = SubResource("SB_close_h")
 theme_override_styles/focus = SubResource("SB_close_n")
 text = "✕"
 
-[node name="Sprite2D9" type="Sprite2D" parent="BookRoot/CloseButton" unique_id=1216441665]
-position = Vector2(-488, 652)
-texture = ExtResource("5_sp27r")
-
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1481510591]
-position = Vector2(640.00006, 113)
-scale = Vector2(1.1488888, 1.148889)
+position = Vector2(635, 391)
 texture = ExtResource("4_6hino")
 
 [node name="TitleBar2" type="Label" parent="." unique_id=1127979541]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_left = 10.0
-offset_top = 22.0
-offset_right = -539.0
-offset_bottom = 52.0
+offset_left = 11.0
+offset_top = 66.0
+offset_right = -538.0
+offset_bottom = 96.0
 grow_horizontal = 2
-theme_override_colors/font_color = Color(0.8627451, 0.76862746, 0.6313726, 1)
+theme_override_colors/font_color = Color(0.89411765, 0.84313726, 0.6627451, 1)
 theme_override_fonts/font = ExtResource("2_bold")
 theme_override_font_sizes/font_size = 17
 text = "Discoverd"
@@ -227,10 +260,10 @@ vertical_alignment = 1
 
 [node name="RightTitle" type="Label" parent="." unique_id=806061038]
 layout_mode = 0
-offset_left = 757.02
-offset_top = 61.05
-offset_right = 1257.0205
-offset_bottom = 74.05
+offset_left = 732.0
+offset_top = 107.0
+offset_right = 1232.0005
+offset_bottom = 120.0
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.3, 0.17, 0.03, 1)
 theme_override_fonts/font = ExtResource("2_bold")
@@ -238,4 +271,41 @@ theme_override_font_sizes/font_size = 12
 text = "Unknown"
 horizontal_alignment = 1
 
+[node name="BestiaryButton" type="Button" parent="." unique_id=534873164]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -116.0
+offset_top = 101.0
+offset_right = -77.0
+offset_bottom = 143.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_ogcpa")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_h1v1f")
+theme_override_styles/hover = SubResource("StyleBoxFlat_esmbn")
+icon = ExtResource("7_y2ft0")
+icon_alignment = 1
+
+[node name="Button" type="Button" parent="." unique_id=195590042]
+layout_mode = 0
+offset_left = 308.0
+offset_top = 603.0
+offset_right = 408.0
+offset_bottom = 629.0
+theme_override_colors/font_color = Color(0.89411765, 0.84313726, 0.6627451, 1)
+theme_override_colors/font_focus_color = Color(0.8117647, 0.7176471, 0.54509807, 1)
+theme_override_colors/font_pressed_color = Color(0.89411765, 0.84313726, 0.6627451, 1)
+theme_override_colors/font_hover_color = Color(0.8117647, 0.7176471, 0.54509807, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.89411765, 0.84313726, 0.6627451, 1)
+theme_override_fonts/font = ExtResource("2_bold")
+theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("StyleBoxFlat_y2ft0")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_dxc84")
+theme_override_styles/hover = SubResource("StyleBoxFlat_paojo")
+text = "◄ BACK"
+
 [connection signal="pressed" from="BookRoot/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
